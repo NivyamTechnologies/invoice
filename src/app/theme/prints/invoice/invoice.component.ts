@@ -34,8 +34,10 @@ export class InvoiceComponent implements OnInit,OnDestroy {
   school={}
   dataRows = []
   columns = [
-    {name : "Quantity",prop : "Quantity"},
+    
     {name : "Name", prop : "ItemName"},
+    {name : "Quantity",prop : "Quantity"},
+    {name : "HsnCode",prop : "HsnCode"},
     {name : "Rate", prop : "rate"},
     {name : 'Tax(%)', prop : "tex_rate"},
     {name : 'Amount', prop : "NetPrice"}
@@ -113,6 +115,10 @@ export class InvoiceComponent implements OnInit,OnDestroy {
             font-weight: bolder;
             padding: 2%;
 
+          }
+          .moveBottom {
+            
+            margin-bottom: 150mm;
           }
           </style>
           <link rel="stylesheet" type="text/css" href="./print.css">

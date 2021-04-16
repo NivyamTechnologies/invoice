@@ -55,24 +55,26 @@
                 {{model['CustomerName']}}
               </div>
             </div>
-            <!-- <div class="row">
+            <div class="row">
               <div class="col-sm-2">
                 Address : 
               </div>
               <div class="col-sm-4">
                 {{school['Address']}}
               </div>
-            </div> -->
+            </div>
             </div>  
-            <div class="table-responsive">
+            <div class="table-responsive"  >
               <table class="table table-bordered">
                 <thead style="text-align: center;">
                 <tr>
+                  <th>SNo.</th>
                   <th *ngFor="let col of columns">{{col['name']}}</th>
                 </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let row of dataRows" style="text-align: center;font-weight: 500;">
+                  <tr *ngFor="let row of dataRows, let i = index" style="text-align: center;font-weight: 500;">
+<td >{{i+1}}</td>
                     <td *ngFor="let col of columns">
                       {{row[col['prop']]}}
                     </td>
@@ -80,7 +82,7 @@
                 </tbody>
               </table>
             </div>
-            
+            <div style=" margin-bottom: 100mm;" *ngIf="dataRows?.length < 10"></div>
             <div class="bill">
               <div class="row">
                 <div class="col-8"></div>

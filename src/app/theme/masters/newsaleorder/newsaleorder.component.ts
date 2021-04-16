@@ -58,7 +58,7 @@ totaldiscount=0;
   
   getItemList()
   {
-    let qry = "Select ItemId,ItemName,Qty,rate,tex_rate from item"
+    let qry = "Select ItemId,ItemName,Qty,rate,tex_rate,HsnCode from item"
     this.api.Post("/users/executeSelectStatement",{Query : qry}).subscribe(item=>{
      this.ItemList = item['data']
      console.log("Item List :",item)
@@ -83,12 +83,13 @@ totaldiscount=0;
       'Quantity' : 1,
       'disc' : 0,
       'discrate':0,
+      'HsnCode' : this.ItemList[0]['HsnCode'],
       'Qty' : this.ItemList[0]['Qty'],
       'NetPrice' : this.ItemList[0]['rate'],
       'tex_rate' : this.ItemList[0]['tex_rate'],
       'taxamount' : this.ItemList[0]['taxamount']
     }
-   
+   debugger
     this.dataRows.push(saleDetailModel)
     this.dataRows = [...this.dataRows]
     this.updateNetPrice(this.dataRows.length-1)
@@ -119,6 +120,7 @@ totaldiscount=0;
         this.dataRows[index]['rate'] = item['rate']
         this.dataRows[index]['Qty'] = item['Qty']
         this.dataRows[index]['tex_rate'] = item['tex_rate']
+        this.dataRows[index]['HsnCode'] = item['HsnCode']
         // this.dataRows[index]['taxamount'] = Number( item['rate'])* Number(item['Qty'])
       }
     })
@@ -284,6 +286,7 @@ if(disc>0){
 
   printInvoice() // function to generate invoice data
   {
+    debugger
       localStorage.setItem("invoice",JSON.stringify({"form":this.model,"table":this.dataRows})) // storing data to print on invoice
       this.route.navigateByUrl('/print/invoice') // taking to the invoice print page
   }

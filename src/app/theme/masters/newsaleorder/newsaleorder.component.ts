@@ -117,7 +117,7 @@ totaldiscount=0;
     this.ItemList.forEach(item=>{
       if(item['ItemId'] == ItemId)
       {
-        this.dataRows[index]['rate'] = item['rate']
+        //this.dataRows[index]['rate'] = item['rate']
         this.dataRows[index]['Qty'] = item['Qty']
         this.dataRows[index]['tex_rate'] = item['tex_rate']
         this.dataRows[index]['HsnCode'] = item['HsnCode']
@@ -126,6 +126,9 @@ totaldiscount=0;
     })
     this.updateNetPrice(index)
   }
+
+
+  
 
   updateNetPrice(index)
   {
@@ -288,6 +291,6 @@ if(disc>0){
   {
     debugger
       localStorage.setItem("invoice",JSON.stringify({"form":this.model,"table":this.dataRows})) // storing data to print on invoice
-      this.route.navigateByUrl('/print/invoice') // taking to the invoice print page
+      this.route.navigateByUrl('/print/newprint') // taking to the invoice print page
   }
 }

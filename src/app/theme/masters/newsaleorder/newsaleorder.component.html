@@ -73,8 +73,8 @@
     </ng-template>
   </ngx-datatable-column>
   <ngx-datatable-column name="Rate" prop="rate">
-    <ng-template let-row="row" ngx-datatable-cell-template>
-      {{row['rate']}}
+    <ng-template let-row="row" ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="row" let-value="value">
+      <input type="number" min="0"  class="form-control" (blur)="update(rowIndex,'rate',$event.target.value)" [value]="value">
     </ng-template>
   </ngx-datatable-column>
   

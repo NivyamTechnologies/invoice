@@ -1,6 +1,7 @@
 import {NgModule} from '@angular/core'
 import {Routes,RouterModule} from '@angular/router'
 import { InvoiceComponent } from './invoice/invoice.component'
+import { NewprintComponent } from './newprint/newprint.component'
 
 const routes : Routes = [{
     path : '',
@@ -10,6 +11,15 @@ const routes : Routes = [{
             component : InvoiceComponent,
             data : {
                 title : 'Invoice',
+                icon : 'ti-layers',
+                status : true
+            }
+        },
+        {
+            path : 'newprint',
+            component : NewprintComponent,
+            data : {
+                title : 'Newprint',
                 icon : 'ti-layers',
                 status : true
             }

@@ -49,8 +49,9 @@ totaldiscount=0;
     NetAmount : '',
     ListId : -1,
     CreatedDate : '',
-    taxtype:'igst',
-    taxamount:''
+    taxtype:'cgst',
+    taxamount:'',
+    billtype:'Cash'
   }
   
   saveSale = new ProcessSale(this.api)

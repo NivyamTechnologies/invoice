@@ -170,6 +170,22 @@ const MENUITEMS = [
         type: 'link',
         icon: 'ti-crown'
       },
+      {
+        state: 'accountledger',
+        short_label: 'FW',
+        main_state: 'forms',
+        name: 'Account Ledger',
+        type: 'link',
+        icon: 'ti-crown'
+      },
+      {
+        state: 'ledgerbrowser',
+        short_label: 'FW',
+        main_state: '',
+        name: 'Ledger Browser',
+        type: 'link',
+        icon: 'ti-crown'
+      },
 
     ]
   }

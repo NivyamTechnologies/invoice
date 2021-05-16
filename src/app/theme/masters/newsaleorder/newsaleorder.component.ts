@@ -209,7 +209,7 @@ if(disc>0){
     this.dataRows.forEach(row=>{
       let count = 0
     
-      this.totaldiscount = this.totaldiscount+row['discrate'];
+    //  this.totaldiscount = this.totaldiscount;//+row['discrate'];
       this.dataRows.forEach(nextRow=>{
           if(Number(row['ItemId']) == Number(nextRow['ItemId']))
           {

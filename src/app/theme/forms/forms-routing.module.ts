@@ -64,6 +64,10 @@ const routes: Routes = [
       {
         path: 'ngx',
         loadChildren: './ngx-wizard/ngx-wizard.module#NGXFormWizardModule'
+      },
+      {
+        path : 'accountledger',
+        loadChildren : './accountledger/accountledger.module#AccountledgerModule'
       }
     ]
   }

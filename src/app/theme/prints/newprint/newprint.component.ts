@@ -21,6 +21,7 @@ export class NewprintComponent implements OnInit, OnDestroy {
       this.model = JSON.parse(localStorage.getItem("invoice"))['form']     // getting form data from the invoice data
       this.dataRows = JSON.parse(localStorage.getItem("invoice"))['table'] // getting item data from the invoice data
       this.getschooldetail(this.model['SaleId'])
+      this.gettaxdata(this.model['SaleId']);
 
 
     }
@@ -41,6 +42,7 @@ export class NewprintComponent implements OnInit, OnDestroy {
    model = {}
   company = {}
   school={}
+  taxdata:any;
   dataRows = []
   columns = [
     
@@ -71,6 +73,18 @@ export class NewprintComponent implements OnInit, OnDestroy {
     this.api.Post("/users/executeSelectStatement",{Query : qry}).subscribe((data)=>{
       console.log(data)
       this.school = data['data'][0]
+    })
+
+  }
+
+  gettaxdata(id){
+    debugger
+    let qry = `SELECT tex_rate,sum(taxamount) taxamount,sum(discrate) discount 
+    FROM t_sale_detail 
+    WHERE SaleId=${id} GROUP BY tex_rate`
+    this.api.Post("/users/executeSelectStatement",{Query : qry}).subscribe((data)=>{
+      console.log(data)
+      this.taxdata = data['data']
     })
 
   }

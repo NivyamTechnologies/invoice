@@ -10,7 +10,7 @@ describe('workspace-project App', () => {
 
   it('should display welcome message', () => {
     page.navigateTo();
-    expect(page.getTitleText()).toEqual('Welcome to gradient-able-v7.3.7!');
+    expect(page.getTitleText()).toEqual('Welcome to Nivyam Tech');
   });
 
   afterEach(async () => {

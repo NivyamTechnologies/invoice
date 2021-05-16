@@ -143,6 +143,10 @@ const routes: Routes = [
       {
         path : 'print',
         loadChildren : './theme/prints/prints.module#PrintsModule'
+      },
+      {
+        path : 'ledgerbrowser',
+        loadChildren : './theme/browsers/ledger-browsers/ledger-browsers.module#LedgerBrowsersModule'
       }
     ]
   },

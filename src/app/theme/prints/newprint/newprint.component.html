@@ -225,25 +225,27 @@
         <div id="footer" *ngIf = 'count == "first"'>
           <div style="margin: 3mm;">
             <div class="col-7 row" style="border-bottom: 1px solid black; margin-bottom: 1mm; padding: 0mm; margin: 0mm;">
-              <!-- <p class="col-2" style="margin-bottom: 1mm;">HSN/SAC</p>
-              <p class="col-2" style="margin-bottom: 1mm;">Tax Rate</p> -->
+              <!-- <p class="col-2" style="margin-bottom: 1mm;">HSN/SAC</p> -->
+              <p class="col-2" style="margin-bottom: 1mm;">Tax Rate</p>
               <p class="col-2" style="padding: 0mm; margin-bottom: 1mm;">Discount</p>
               <p class="col-2" style="margin-bottom: 1mm;">CGST</p>
               <p class="col-2" style="margin-bottom: 1mm;">SGST</p>
               <p class="col-2" style="margin-bottom: 1mm;">Total Tax</p>
             </div>
-            <div class="col-7 row" style="margin: 0mm;">
-              <!-- <p class="col-2" style="margin-bottom: 1mm;">{{data[0]['HsnCode']}}</p>
-              <p class="col-2" style="margin-bottom: 1mm;">{{data[0]['tex_rate']}}</p> -->
-              <p class="col-2" style="padding: 0mm; margin-bottom: 1mm;">{{model['discount']}}</p>
-              <p class="col-2" style="margin-bottom: 1mm;">{{model['taxamount']/2}}</p>
-              <p class="col-2" style="margin-bottom: 1mm;">{{model['taxamount']/2}}</p>
-              <p class="col-2" style="margin-bottom: 1mm;">{{model['taxamount']}}</p>
+            
+            <div class="col-7 row" style="margin: 0mm;" *ngFor = 'let tax of taxdata' >
+              <!-- <p class="col-2" style="margin-bottom: 1mm;">{{data[0]['HsnCode']}}</p> -->
+              <p class="col-2" style="margin-bottom: 1mm;">{{tax['tex_rate']}}%</p>
+              <p class="col-2" style="padding: 0mm; margin-bottom: 1mm;">{{tax['discount']}}</p>
+              <p class="col-2" style="margin-bottom: 1mm;">{{tax['taxamount']/2}}</p>
+              <p class="col-2" style="margin-bottom: 1mm;">{{tax['taxamount']/2}}</p>
+              <p class="col-2" style="margin-bottom: 1mm;">{{tax['taxamount']}}</p>
             </div>
           </div>
-          <!-- <div style="margin: 3mm;">
-            <h6>Rupees Five Lakh Forty Two Thousand Six Hundred Thirty Only</h6>
-          </div> -->
+          <div style="margin: 3mm;">
+            Total Tax Amount: 
+            <!-- <h6> INR Rupees Five Lakh Forty Two Thousand Six Hundred Thirty Only</h6> -->
+          </div>
             <div class="row" style="border: 1px solid black; margin: 0mm;">
               <div class="col-6 lastBlock">
                 <h6><u>Terms & Conditions</u></h6>
@@ -283,10 +285,10 @@
               <p class="col-2" style="margin-bottom: 1mm;">{{model['taxamount']}}</p>
             </div>
           </div>
-          <!-- <div style="margin: 3mm;">
+          <div style="margin: 3mm;">
             <h6>Rupees Five Lakh Forty Two Thousand Six Hundred Thirty Only</h6>
           
-          </div> -->
+          </div>
             <div class="row" style="border: 1px solid black; margin: 0mm;">
               <div class="col-6 lastBlock">
                 <h6><u>Terms & Conditions</u></h6>

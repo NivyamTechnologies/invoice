@@ -9,14 +9,7 @@ const routes: Routes = [
       status: false
     },
     children: [
-      {
-        path: 'basic',
-        loadChildren: './basic-elements/basic-elements.module#BasicElementsModule'
-      },
-      {
-        path: 'add-on',
-        loadChildren: './add-on/add-on.module#AddOnModule'
-      },
+      
       {
         path: 'item',
         loadChildren: './item/item.module#ItemModule'
@@ -41,30 +34,7 @@ const routes: Routes = [
         path: 'purchasereport',
         loadChildren: './purchasereport/purchasereport.module#PurchasereportModule'
       },
-      {
-        path: 'advance',
-        loadChildren: './advance-elements/advance-elements.module#AdvanceElementsModule'
-      },
-      {
-        path: 'validation',
-        loadChildren: './form-validation/form-validation.module#FormValidationModule'
-      },
-      {
-        path: 'picker',
-        loadChildren: './form-picker/form-picker.module#FormPickerModule'
-      },
-      {
-        path: 'select',
-        loadChildren: './form-select/form-select.module#FormSelectModule'
-      },
-      {
-        path: 'form-wizards',
-        loadChildren: './form-wizards/form-wizards.module#FormWizardsModule'
-      },
-      {
-        path: 'ngx',
-        loadChildren: './ngx-wizard/ngx-wizard.module#NGXFormWizardModule'
-      },
+      
       {
         path : 'accountledger',
         loadChildren : './accountledger/accountledger.module#AccountledgerModule'

@@ -32,10 +32,7 @@ const routes: Routes = [
         path: 'navigation',
         loadChildren: './theme/navigation/navigation.module#NavigationModule'
       },
-      {
-        path: 'widget',
-        loadChildren: './theme/widget/widget.module#WidgetModule'
-      },
+      
       {
         path: 'basic',
         loadChildren: './theme/ui-elements/basic/basic.module#BasicModule'
@@ -53,14 +50,6 @@ const routes: Routes = [
         loadChildren: './theme/forms/forms.module#FormsModule'
       },
       {
-        path: 'bootstrap-table',
-        loadChildren: './theme/table/bootstrap-table/bootstrap-table.module#BootstrapTableModule'
-      },
-      {
-        path: 'data-table',
-        loadChildren: './theme/table/data-table/data-table.module#DataTableModule'
-      },
-      {
         path: 'maintenance/error',
         loadChildren: './theme/maintenance/error/error.module#ErrorModule'
       },
@@ -68,18 +57,7 @@ const routes: Routes = [
         path: 'maintenance/coming-soon',
         loadChildren: './theme/maintenance/coming-soon/coming-soon.module#ComingSoonModule'
       },
-      {
-        path: 'user',
-        loadChildren: './theme/user/user.module#UserModule'
-      },
-      {
-        path: 'email',
-        loadChildren: './theme/email/email.module#EmailModule'
-      },
-      {
-        path: 'task',
-        loadChildren: './theme/task/task.module#TaskModule'
-      },
+      
       {
         path: 'crm-contact',
         loadChildren: './theme/crm-contact/crm-contact.module#CrmContactModule'
@@ -100,14 +78,8 @@ const routes: Routes = [
         path: 'charts',
         loadChildren: './theme/chart/chart.module#ChartModule'
       },
-      {
-        path: 'map',
-        loadChildren: './theme/map/map.module#MapModule'
-      },
-      {
-        path: 'simple-page',
-        loadChildren: './theme/simple-page/simple-page.module#SimplePageModule'
-      },
+      
+      
       {
         path : 'list',
         loadChildren : './theme/masters/booklist/booklist.module#BooklistModule'
@@ -158,17 +130,10 @@ const routes: Routes = [
         path: 'auth',
         loadChildren: './theme/auth/auth.module#AuthModule'
       },
-      {
-        path: 'email/email-template',
-        loadChildren: './theme/email/email-template/email-template.module#EmailTemplateModule'
-      },
+      
       {
         path: 'maintenance/offline-ui',
         loadChildren: './theme/maintenance/offline-ui/offline-ui.module#OfflineUiModule'
-      },
-      {
-        path: 'landing',
-        loadChildren: './theme/landing/landing.module#LandingModule'
       }
     ]
   }

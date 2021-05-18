@@ -105,13 +105,56 @@ totaldiscount=0;
     this.updateTotalAmount()
     this.updateTotaltax()
   }
+  updateItem(index,col,value)
+  {
+    let qry = `Select i.ItemId, 
+    (ifnull(item.Qty,0))-sum(ifnull(Quantity,0)) balance from item i  left join t_doc_detail item  on item.ItemId =i.ItemId  left JOIN t_sale_detail  on t_sale_detail.ItemId=i.ItemId where i.ItemId= ${value} GROUP by i.ItemId`
+    this.api.Post("/users/executeSelectStatement",{Query : qry}).subscribe(itemstock=>{
+     let data = itemstock['data']
+     if(data[0].balance>0){
+      this.dataRows[index][col] = value
+      this.updateRow(index)
+     }
+     else{
+      this.dataRows.splice(index,1)
+      this.dataRows = [...this.dataRows]
+       alert("Item stock is 0");
+     }
+    
+    })
+   
+  }
 
   update(index,col,value)
   {
     this.dataRows[index][col] = value
     this.updateRow(index)
   }
+  update1(index,col,value)
+  {
+    this.dataRows[index][col] = value
+    this.updateRow1(index)
+  }
+
   updateRow(index)
+  {
+    debugger
+    let ItemId = this.dataRows[index]['ItemId']
+    this.ItemList.forEach(item=>{
+      if(item['ItemId'] == ItemId)
+      {
+        this.dataRows[index]['rate'] = item['rate']
+        this.dataRows[index]['Qty'] = item['Qty']
+        this.dataRows[index]['tex_rate'] = item['tex_rate']
+        this.dataRows[index]['HsnCode'] = item['HsnCode']
+        // this.dataRows[index]['taxamount'] = Number( item['rate'])* Number(item['Qty'])
+      }
+    })
+    this.updateNetPrice(index)
+  }
+
+  
+  updateRow1(index)
   {
     debugger
     let ItemId = this.dataRows[index]['ItemId']

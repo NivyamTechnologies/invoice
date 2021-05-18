@@ -34,7 +34,11 @@ export class SchoolComponent implements OnInit {
     "Contact" : '',
     "discount" : '',
     "gstno" : '',
-    "panno" : ''
+    "panno" : '',
+    "AadharNo":null,
+  "VichleNo":null,
+  "GRRNo":null,
+  "EwayBillNo":null
   }
 
   getSchool(SchoolId)

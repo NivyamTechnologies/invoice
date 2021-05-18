@@ -65,7 +65,7 @@ export class NewprintComponent implements OnInit, OnDestroy {
 
   getschooldetail(id){
     debugger
-    let qry = `SELECT Address,gstno,panno FROM t_sale_master
+    let qry = `SELECT Address,gstno,panno,GRRNo,VichleNo,EwayBillNo FROM t_sale_master
     left JOIN
     t_school_master
     on t_school_master.SchoolId =t_sale_master.SchoolId
@@ -79,7 +79,7 @@ export class NewprintComponent implements OnInit, OnDestroy {
 
   gettaxdata(id){
     debugger
-    let qry = `SELECT tex_rate,sum(taxamount) taxamount,sum(discrate) discount 
+    let qry = `SELECT tex_rate,sum(taxamount) taxamount,ifnull(sum(discrate),0) discount 
     FROM t_sale_detail 
     WHERE SaleId=${id} GROUP BY tex_rate`
     this.api.Post("/users/executeSelectStatement",{Query : qry}).subscribe((data)=>{

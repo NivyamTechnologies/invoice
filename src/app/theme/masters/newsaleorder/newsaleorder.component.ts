@@ -59,7 +59,7 @@ totaldiscount=0;
   
   getItemList()
   {
-    let qry = "Select ItemId,ItemName,Qty,rate,tex_rate,HsnCode from item"
+    let qry = "Select ItemId,ItemName,Qty,rate,tex_rate,HsnCode from item where Active='Y'" 
     this.api.Post("/users/executeSelectStatement",{Query : qry}).subscribe(item=>{
      this.ItemList = item['data']
      console.log("Item List :",item)

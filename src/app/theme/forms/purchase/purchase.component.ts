@@ -72,7 +72,7 @@ header:any;
   }
   sdd1(){
     this.val1=''
-    this.sql1('Select ItemId, ItemName from item').subscribe(res=>{
+    this.sql1('Select ItemId, ItemName from item where Active="Y"').subscribe(res=>{
       this.item = Object.values(res)[0];
     })
   }
@@ -119,7 +119,7 @@ this.header =[this.totalamount,this.val,this.date1,this.BillNo];
 this.detail = [];
 this.mydata.forEach(foo => {
 
-  foo['netrate'] = foo['rate']* foo['Qty']
+  foo['netrate'] = foo['purchaseprice']* foo['Qty']
   foo['totalamount'] = foo['Total']
   foo['CreatedDate'] = this.date1
   foo['ItemSeq']= 1

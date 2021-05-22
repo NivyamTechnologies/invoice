@@ -50,7 +50,7 @@
                     <input class="form-control form-control-sm" autofocus (blur)="updateValue($event, 'tex_rate', rowIndex);editno(rowIndex)" type="text" [value]="value" />
                 </ng-template>
             </ngx-datatable-column>
-            <ngx-datatable-column name="rate" [width]='10' prop='purchaseprice' [sortable]="false">
+            <ngx-datatable-column name="purchaseprice" [width]='10' prop='purchaseprice' [sortable]="false">
                 <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
 
                     <input class="form-control form-control-sm" autofocus (blur)="updateValue($event, 'purchaseprice', rowIndex);editno(rowIndex)" type="text" [value]="value" />

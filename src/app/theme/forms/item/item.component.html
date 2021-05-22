@@ -37,23 +37,22 @@
                 </div>
             </div>
         </div>
-        <!-- <div class="row">
-            <label class="col-sm-4 col-lg-2 col-form-label">Parkasan</label>
+        <div class="row">
+            <label class="col-sm-4 col-lg-2 col-form-label">Active</label>
             <div class="col-sm-8 col-lg-10">
                 <div class="input-group">
                     <span class="input-group-prepend">
-                                                                <label class="input-group-text"><i class="icofont icofont-queen"></i></label>
-                                                            </span>
+                      <label class="input-group-text"><i class="icofont icofont-queen"></i></label>
+                     </span>
                    
-                   <select class="form-control" [(ngModel)]="myvar.PartyId">
-                       <option *ngFor="let party of PartyList" [value]="party['PartyId']">
-                           {{party['PartyName']}}
-                       </option>
+                   <select class="form-control" [(ngModel)]="myvar.Active">
+                       <option  value="Y"> Y</option>
+                       <option  value="N">N</option>
                    </select>
                                                            
                 </div>
             </div>
-        </div> -->
+        </div> 
         <div class="row">
             <label class="col-sm-4 col-lg-2 col-form-label">Short Name</label>
             <div class="col-sm-8 col-lg-10">

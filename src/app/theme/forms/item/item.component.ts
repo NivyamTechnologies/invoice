@@ -35,7 +35,8 @@ export class ItemComponent implements OnInit {
   purchaseprice:null,
   setcode:null,
   ItemCode:null,
-  PartyId:null
+  PartyId:null,
+  Active:null
 
 
 }

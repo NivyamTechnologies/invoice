@@ -65,7 +65,7 @@ export class NewprintComponent implements OnInit, OnDestroy {
 
   getschooldetail(id){
     debugger
-    let qry = `SELECT Address,gstno,panno,GRRNo,VichleNo,EwayBillNo FROM t_sale_master
+    let qry = `SELECT Address,gstno,panno,GRRNo,VichleNo,EwayBillNo,AadharNo,Contact FROM t_sale_master
     left JOIN
     t_school_master
     on t_school_master.SchoolId =t_sale_master.SchoolId

@@ -53,8 +53,9 @@ header:any;
     
       this.sdd();
       this.sdd1();
-    
-    
+      let date = new Date().toISOString().split('T')[0]
+      this.date1= date
+    // this.date1 = new Date();
 
   }
   sql1(data){

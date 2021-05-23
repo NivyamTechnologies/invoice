@@ -1,5 +1,57 @@
 <app-card [title]="'Sale Order'">
 
+
+  <app-modal-basic #modalLarge [dialogClass]="'modal-lg'">
+    <div class="app-modal-header">
+        <h4 class="modal-title">Batch No.</h4>
+        <button type="button" class="close basic-close" (click)="modalLarge.hide()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="app-modal-body" id="print" style="text-align: center">
+      <ngx-datatable 
+      class="data-table"
+      [rows]="batchlist"
+      [columnMode]="'force'" 
+      [headerHeight]="50"  
+      [rowHeight]="45" 
+      [scrollbarH]="true" 
+      [limit]="50"
+      [selected]="selected"
+        [selectionType]="'checkbox'" 
+        [selectAllRowsOnPage]="true"  (select)='onSelect($event)'>
+
+      <ngx-datatable-column name="Select" [width]="35" [sortable]="false" [canAutoResize]="false" [draggable]="true" [resizeable]="false" [headerCheckboxable]="true" [checkboxable]="true">
+      </ngx-datatable-column>
+      <ngx-datatable-column [sortable]="false" name="Batch"  prop="batch_no" width="60">
+        <ng-template let-row="row" let-value="value" let-rowIndex="rowIndex" ngx-datatable-cell-template>
+          {{row['batch_no']}}
+        </ng-template>
+      </ngx-datatable-column> 
+      <ngx-datatable-column [sortable]="false" name="Qty"  prop="Qty" width="60">
+        <ng-template let-row="row" let-value="value" let-rowIndex="rowIndex" ngx-datatable-cell-template>
+          {{row['Qty']}}
+        </ng-template>
+      </ngx-datatable-column> 
+      <ngx-datatable-column [sortable]="false" name="Rate"  prop="netrate" width="60">
+        <ng-template let-row="row" let-value="value" let-rowIndex="rowIndex" ngx-datatable-cell-template>
+          {{row['netrate']}}
+        </ng-template>
+      </ngx-datatable-column> 
+ 
+
+</ngx-datatable>
+
+
+    </div>
+    <div class="app-modal-footer">
+        <button type="button" class="btn btn-default waves-effect"
+            (click)="modalLarge.hide()">Close</button>
+    </div>
+    <div class="app-modal-footer">
+        <button (click)="sumbitbatch();modalLarge.hide()" type="button" class="btn btn-primary">Save</button>
+    </div>
+</app-modal-basic>
   
  <form #SaleOrder="ngForm" (ngSubmit)="submit()">
    <div class="row">
@@ -72,30 +124,38 @@
   [rowHeight]="45" 
   [scrollbarH]="true" 
   [limit]="50">
+  <ngx-datatable-column [sortable]="false" name="Batch"  prop="batch_no" width="60">
+    <ng-template let-row="row" let-value="value" let-rowIndex="rowIndex" ngx-datatable-cell-template>
+      <i class="fa fa-pencil-square" (click)="updatebatch(rowIndex,'batch_no');modalLarge.show()" alt="BatchNo"></i>
+    </ng-template>
+  </ngx-datatable-column> 
 
   <ngx-datatable-column name="Item Name" prop="ItemId">
     <ng-template ngx-datatable-cell-template let-row="row" let-rowIndex="rowIndex" let-value="value">
-      <select class="form-control" [ngModel]="row['ItemId']" (blur)="updateItem(rowIndex,'ItemId',$event.target.value)">
+      <select class="form-control" [ngModel]="row['ItemId']"
+       (change)="updateItem(rowIndex,'ItemId',$event.target.value)">
         <option *ngFor="let item of ItemList" [value]="item['ItemId']">
           {{item['ItemName']}}
         </option>
       </select>
     </ng-template>
   </ngx-datatable-column>
+
+
   <ngx-datatable-column name="Rate" prop="rate">
     <ng-template let-row="row" ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="row" let-value="value">
-      <input type="number" min="0"  class="form-control" (blur)="update1(rowIndex,'rate',$event.target.value)" [value]="value">
+      <input type="number" min="0"  class="form-control" (change)="update1(rowIndex,'rate',$event.target.value)" [value]="value">
     </ng-template>
   </ngx-datatable-column>
   
   <ngx-datatable-column name="disc" prop="disc"    >
     <ng-template let-row="row" ngx-datatable-cell-template  let-rowIndex="rowIndex" let-row="row" let-value="value">
-      <input type="number" min="0"  class="form-control" (blur)="update(rowIndex,'disc',$event.target.value)" [value]="value">
+      <input type="number" min="0"  class="form-control" (change)="update1(rowIndex,'disc',$event.target.value)" [value]="value">
     </ng-template>
   </ngx-datatable-column>
   <ngx-datatable-column name="Quantity" prop="Quantity">
     <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="row" let-value="value">
-      <input type="number" min="0"  class="form-control" (blur)="update(rowIndex,'Quantity',$event.target.value)" [value]="value">
+      <input type="number" min="0"  class="form-control" (change)="update1(rowIndex,'Quantity',$event.target.value)" [value]="value">
     </ng-template>
   </ngx-datatable-column>
   <ngx-datatable-column name="Tax(%)" prop="tex_rate">

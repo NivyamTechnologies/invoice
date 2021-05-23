@@ -28,7 +28,7 @@
 
 
  
-            <ngx-datatable-column [sortable]="true " name="ItemName" [width]='50' prop="ItemName ">
+            <ngx-datatable-column [sortable]="true " name="ItemName" [width]='100' prop="ItemName ">
                 <ng-template let-row="row" ngx-datatable-cell-template>
                     {{row.ItemName }}
                 </ng-template>
@@ -50,18 +50,17 @@
                     <input class="form-control form-control-sm" autofocus (blur)="updateValue($event, 'tex_rate', rowIndex);editno(rowIndex)" type="text" [value]="value" />
                 </ng-template>
             </ngx-datatable-column>
-            <ngx-datatable-column name="purchaseprice" [width]='10' prop='purchaseprice' [sortable]="false">
+            <ngx-datatable-column name="Price" [width]='10' prop='purchaseprice' [sortable]="false">
                 <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
 
                     <input class="form-control form-control-sm" autofocus (blur)="updateValue($event, 'purchaseprice', rowIndex);editno(rowIndex)" type="text" [value]="value" />
                 </ng-template>
             </ngx-datatable-column>
-            <!-- <ngx-datatable-column name="dis" [width]='10' prop='dis' [sortable]="false">
+            <ngx-datatable-column name="Batch" [width]='10' prop='batch_no' [sortable]="false">
                 <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
 
-                    <input class="form-control form-control-sm" autofocus (blur)="updateValue($event, 'dis', rowIndex);editno(rowIndex)" type="text" [value]="value" />
-                </ng-template>
-            </ngx-datatable-column> -->
+                    <input class="form-control form-control-sm" autofocus (blur)="updateValue($event, 'batch_no', rowIndex);editno(rowIndex)" type="text" [value]="value" />       </ng-template>
+            </ngx-datatable-column>
             <ngx-datatable-column name="dis%" [width]='10' prop='disper' [sortable]="false">
                 <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
 

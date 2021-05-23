@@ -16,7 +16,7 @@ export class PurchasereportComponent implements OnInit {
 
   ngOnInit() {
    
-    this.sql1('SELECT t_doc_header.DocNo,t_doc_header.BillNo,party.PartyName,Total,DocDate from t_doc_header left join party on t_doc_header.PartyId= party.PartyId').subscribe(res=>{
+    this.sql1('SELECT t_doc_header.DocNo,t_doc_header.BillNo,party.PartyName,Total,DocDate from t_doc_header left join party on t_doc_header.PartyId= party.PartyId order by t_doc_header.DocNo desc').subscribe(res=>{
       
     this.mydata=Object.values(res)[0];
     

@@ -31,15 +31,16 @@ export class NewsaleorderComponent implements OnInit {
   ngOnInit() {
     this.getItemList()
     this.getSchoolList()
+
   }
   ItemList = []
   SchoolList = []
   dataRows = []
-
+  selected = [];
   Type="NewSale"
   title="New Sale"
 totaldiscount=0;
-
+batchlist=[]
   model = {
     SaleId : '',
     CustomerName : '',
@@ -74,6 +75,8 @@ totaldiscount=0;
       this.model['SchoolId'] = this.SchoolList[0]['SchoolId']
       console.log("Item List :",school)
      })
+
+   
   }
 
   addrow()
@@ -107,11 +110,18 @@ totaldiscount=0;
   }
   updateItem(index,col,value)
   {
-    let qry = `Select i.ItemId, 
-    (ifnull(item.Qty,0))-sum(ifnull(Quantity,0)) balance from item i  left join t_doc_detail item  on item.ItemId =i.ItemId  left JOIN t_sale_detail  on t_sale_detail.ItemId=i.ItemId where i.ItemId= ${value} GROUP by i.ItemId`
+    let qry = `select (x.PurQty-ifnull(y.saleQty,0)) balance
+    from (Select i.ItemId,i.ItemName,sum(ifnull(item.Qty,0)) PurQty
+    from item i 
+    left join  t_doc_detail item on i.ItemId =item.ItemId where item.ItemId=${value} group by item.ItemId )
+    as x
+    left join ( select   sale.ItemId ItemId,sum(ifnull(sale.Quantity,0)) SaleQty 
+    from  t_sale_detail sale where sale.ItemId=${value} group by sale.ItemId) as y on x.ItemId = y.ItemId 
+    order by balance desc`
     this.api.Post("/users/executeSelectStatement",{Query : qry}).subscribe(itemstock=>{
      let data = itemstock['data']
      if(data[0].balance>0){
+       
       this.dataRows[index][col] = value
       this.updateRow(index)
      }
@@ -123,6 +133,54 @@ totaldiscount=0;
     
     })
    
+  }
+
+  onSelect({ selected }) {
+    debugger
+    this.selected.splice(0, this.selected.length);
+    this.selected.push(...selected);
+  }
+  sumbitbatch(){
+if(this.selected.length>0){
+  if(this.selected.length>1){
+alert("Please select only one records");
+this.selected=[];
+  }
+  else{
+let row = this.selected[0].row;
+  this.dataRows[row]['batch_no']=this.selected[0].batch_no;
+  this.selected=[];
+  }
+}
+
+
+  }
+  updatebatch(index,col){
+    if(col=='batch_no'){
+      let qry1= `select x.ItemId,x.batch_no,x.PurQty-ifnull(y.SaleQty,0) Qty,${index} row,x.netrate
+      from
+      (Select item.ItemId ItemId,batch_no,netrate,
+         sum(ifnull(item.Qty,0)) PurQty
+         from 
+         t_doc_detail item
+         where item.ItemId= ${this.dataRows[index]['ItemId']} and  batch_no is not null group by  batch_no ) as x
+      left join ( 
+      select   sale.ItemId ItemId,batch_no,
+         sum(ifnull(sale.Quantity,0)) SaleQty
+         from 
+         t_sale_detail sale
+         where sale.ItemId= ${this.dataRows[index]['ItemId']} and  batch_no is not null  group by batch_no ) 
+      as y on x.ItemId = y.ItemId and   x.batch_no = y.batch_no
+      where x.PurQty-ifnull(y.SaleQty,0) >0    
+            `
+            debugger
+     this.api.Post("/users/executeSelectStatement",{Query : qry1}).subscribe(school=>{
+       this.batchlist = school['data']
+
+       
+      
+      })
+    }
   }
 
   update(index,col,value)
@@ -143,7 +201,22 @@ totaldiscount=0;
     this.ItemList.forEach(item=>{
       if(item['ItemId'] == ItemId)
       {
+        if(this.dataRows[index]['batch_no']==undefined){
+
+        }
+        else
+        {
+          let lastItem = this.dataRows[index]['batch_no'].split("-").pop();
+          this.dataRows[index]['rate'] =lastItem
+          this.dataRows[index]['batch_no']= this.dataRows[index]['batch_no'].split("-")[0];
+        }
+        // if(this.dataRows[index]['rate']>0){
+
+        // }
+        // else
+        // {
         this.dataRows[index]['rate'] = item['rate']
+        
         this.dataRows[index]['Qty'] = item['Qty']
         this.dataRows[index]['tex_rate'] = item['tex_rate']
         this.dataRows[index]['HsnCode'] = item['HsnCode']
@@ -161,6 +234,7 @@ totaldiscount=0;
     this.ItemList.forEach(item=>{
       if(item['ItemId'] == ItemId)
       {
+        this.dataRows[index]['batch_no']=''
         //this.dataRows[index]['rate'] = item['rate']
         this.dataRows[index]['Qty'] = item['Qty']
         this.dataRows[index]['tex_rate'] = item['tex_rate']

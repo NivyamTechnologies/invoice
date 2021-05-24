@@ -101,9 +101,8 @@ updateValue(event, cell, rowIndex) {
   this.mydata[rowIndex]['disper'] = 0;
  }
  let yy =((this.mydata[rowIndex]["Qty"] *this.mydata[rowIndex]["purchaseprice"] 
- -(this.mydata[rowIndex]["purchaseprice"]*this.mydata[rowIndex]['disper'])/100));
-  this.mydata[rowIndex]["Total"] = (this.mydata[rowIndex]["Qty"] *this.mydata[rowIndex]["purchaseprice"] )
-   -(this.mydata[rowIndex]["purchaseprice"]*this.mydata[rowIndex]['disper'])/100+((yy )*this.mydata[rowIndex]['tex_rate'])/100;
+ -((this.mydata[rowIndex]["purchaseprice"]*this.mydata[rowIndex]["Qty"] )*this.mydata[rowIndex]['disper'])/100));
+  this.mydata[rowIndex]["Total"] = yy+((yy )*this.mydata[rowIndex]['tex_rate'])/100;
   this.totalamount=0;
   this.mydata.forEach(rr => {
   this.totalamount += rr["Total"];

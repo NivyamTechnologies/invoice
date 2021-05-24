@@ -7,7 +7,7 @@ const routes: Routes = [
     path: '',
     component: PurchaseComponent,
     data: {
-      title: 'Add Item',
+      title: 'Purchase Order',
       icon: 'ti-layers',
       status: true
     }

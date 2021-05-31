@@ -88,6 +88,7 @@ export class SchoolComponent implements OnInit {
 
   isValid()
   {
+   
     let valid = true
     let message = ""
     if(this.model['SchoolName'] == "")
@@ -95,12 +96,16 @@ export class SchoolComponent implements OnInit {
       message += "customer Name can't be empty\n"
       valid = false
     }
-    else if(this.model['discount'] == "")
-    {
-      message += "Discount can't be empty\n"
+    var regx= "^[0-9]{2}[A-Z]{5}"
+    "[0-9]{4}[A-Z]{1}["
+    "1-9A-Z]{1}Z[0-9A-Z]{1}$";
+    if (this.model['gstno'] .match(regx)) {
+      
+    } else {
+      message += "Gst No is not valid\n"
       valid = false
     }
-
+   
 
     if(!valid)
     {

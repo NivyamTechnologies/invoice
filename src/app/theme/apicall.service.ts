@@ -13,7 +13,7 @@ import 'rxjs/add/operator/map'
 export class ApicallService {
   serIP='52.66.198.183:3000'
  // serIP = 'localhost:3000'
-  ProfileId = 'testnivyam'
+  ProfileId = 'sangalsons'
   constructor(private http: HttpClient,private datepipe:DatePipe) { }
 
 

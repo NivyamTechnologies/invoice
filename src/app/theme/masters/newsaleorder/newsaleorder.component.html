@@ -70,10 +70,10 @@
    </div>
    <div class="row">
     <div class="col-lg-2 col-md-2 col-sm-4 col-xs-12">
-      Customer1 Name
+      Select Customer
     </div>
     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-      <select class="form-control" name="SchoolId" [(ngModel)]="model['SchoolId']">
+      <select class="form-control" name="SchoolId" (change)="customerchange()"  [(ngModel)]="model['SchoolId']" >
         <option *ngFor="let school of SchoolList" [value]="school['SchoolId']">
           {{school['SchoolName']}}
         </option>
@@ -91,7 +91,7 @@
       Taxname
     </div>
     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-      <select class="form-control" name="SchoolId" [(ngModel)]="model['taxtype']">
+      <select class="form-control" name="taxtype" [(ngModel)]="model['taxtype']">
         <option value="igst">IGST</option>
         <option value="cgst">CGST</option>
       </select>
@@ -100,7 +100,7 @@
       Bill Type
     </div>
     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-      <select class="form-control" name="SchoolId" [(ngModel)]="model['billtype']">
+      <select class="form-control" name="Blltype" [(ngModel)]="model['billtype']">
         <option value="Cash">Cash</option>
         <option value="Bank">Bank</option>
         <option value="Check">Check</option>
@@ -127,6 +127,7 @@
   <ngx-datatable-column [sortable]="false" name="Batch"  prop="batch_no" width="60">
     <ng-template let-row="row" let-value="value" let-rowIndex="rowIndex" ngx-datatable-cell-template>
       <i class="fa fa-pencil-square" (click)="updatebatch(rowIndex,'batch_no');modalLarge.show()" alt="BatchNo"></i>
+      
     </ng-template>
   </ngx-datatable-column> 
 
@@ -199,7 +200,7 @@
         Discount
       </div>
       <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-        <input class="form-control" type="number" min=1 name="discount" [(ngModel)]="model['discount']" (ngModelChange)="applydiscount()">
+        <input class="form-control" type="number"  name="discount" [(ngModel)]="model['discount']" (ngModelChange)="applydiscount()">
       </div>
     </div>
     <div class="row">

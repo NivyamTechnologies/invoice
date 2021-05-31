@@ -34,7 +34,9 @@ export class PartyComponent implements OnInit {
   VichleNo:null,
   GRRNo:null,
   EwayBillNo:null,
-  GstNo:null
+  GstNo:null,
+  Dl1:null,
+  Dl2:null
 
 
 

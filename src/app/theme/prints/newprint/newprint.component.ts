@@ -53,13 +53,14 @@ export class NewprintComponent implements OnInit, OnDestroy {
     {name : 'Tax(%)', prop : "tex_rate"},
     {name : 'Amount', prop : "NetPrice"}
 ]
-
+cname: any;
   getCompanyDetail()
   {
     let qry = "Select * from t_company_master"
     this.api.Post("/users/executeSelectStatement",{Query : qry}).subscribe((data)=>{
       console.log(data)
-      this.company = data['data'][0]
+      this.company = data['data'][0];
+      this.cname = this.company['CompanyName']
     })
   }
 
@@ -79,7 +80,9 @@ export class NewprintComponent implements OnInit, OnDestroy {
 
   gettaxdata(id){
     debugger
-    let qry = `SELECT tex_rate,sum(taxamount) taxamount,ifnull(sum(discrate),0) discount 
+    this.taxdata = []
+
+    let qry = `SELECT tex_rate,Round(sum(taxamount),2) taxamount,ifnull(sum(discrate),0) discount 
     FROM t_sale_detail 
     WHERE SaleId=${id} GROUP BY tex_rate`
     this.api.Post("/users/executeSelectStatement",{Query : qry}).subscribe((data)=>{

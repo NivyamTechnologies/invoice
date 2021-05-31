@@ -73,6 +73,7 @@ batchlist=[]
     this.api.Post("/users/executeSelectStatement",{Query : qry}).subscribe(school=>{
       this.SchoolList = school['data']
       this.model['SchoolId'] = this.SchoolList[0]['SchoolId']
+      this.model['CustomerName'] = this.SchoolList[0]['SchoolName']
       console.log("Item List :",school)
      })
 
@@ -108,6 +109,15 @@ batchlist=[]
     this.updateTotalAmount()
     this.updateTotaltax()
   }
+customerchange(){
+
+let i =  this.model.SchoolId;
+
+this.model['CustomerName'] = this.SchoolList.filter(x => x.SchoolId== i)[0].SchoolName;
+
+
+}
+
   updateItem(index,col,value)
   {
     let qry = `select (x.PurQty-ifnull(y.saleQty,0)) balance
@@ -120,6 +130,7 @@ batchlist=[]
     order by balance desc`
     this.api.Post("/users/executeSelectStatement",{Query : qry}).subscribe(itemstock=>{
      let data = itemstock['data']
+     if(data.length>0){
      if(data[0].balance>0){
        
       this.dataRows[index][col] = value
@@ -130,6 +141,12 @@ batchlist=[]
       this.dataRows = [...this.dataRows]
        alert("Item stock is 0");
      }
+    }
+    else{
+      this.dataRows[index][col] = value
+      this.updateRow(index)
+    }
+    
     
     })
    
@@ -140,6 +157,8 @@ batchlist=[]
     this.selected.splice(0, this.selected.length);
     this.selected.push(...selected);
   }
+
+
   sumbitbatch(){
 if(this.selected.length>0){
   if(this.selected.length>1){
@@ -149,6 +168,9 @@ this.selected=[];
   else{
 let row = this.selected[0].row;
   this.dataRows[row]['batch_no']=this.selected[0].batch_no;
+  this.dataRows[row]['batch_rate']=this.selected[0].netrate;
+  this.dataRows[row]['rate'] =this.selected[0].netrate;
+  this.updateRow1(row)
   this.selected=[];
   }
 }
@@ -201,20 +223,8 @@ let row = this.selected[0].row;
     this.ItemList.forEach(item=>{
       if(item['ItemId'] == ItemId)
       {
-        if(this.dataRows[index]['batch_no']==undefined){
-
-        }
-        else
-        {
-          let lastItem = this.dataRows[index]['batch_no'].split("-").pop();
-          this.dataRows[index]['rate'] =lastItem
-          this.dataRows[index]['batch_no']= this.dataRows[index]['batch_no'].split("-")[0];
-        }
-        // if(this.dataRows[index]['rate']>0){
-
-        // }
-        // else
-        // {
+        
+      
         this.dataRows[index]['rate'] = item['rate']
         
         this.dataRows[index]['Qty'] = item['Qty']
@@ -234,8 +244,7 @@ let row = this.selected[0].row;
     this.ItemList.forEach(item=>{
       if(item['ItemId'] == ItemId)
       {
-        this.dataRows[index]['batch_no']=''
-        //this.dataRows[index]['rate'] = item['rate']
+        
         this.dataRows[index]['Qty'] = item['Qty']
         this.dataRows[index]['tex_rate'] = item['tex_rate']
         this.dataRows[index]['HsnCode'] = item['HsnCode']
@@ -298,6 +307,7 @@ if(disc>0){
     let discount = Number(this.model['discount'])
     let totalamount = Number(this.model['TotalAmount'])
     let discountamount = totalamount * (discount/100)
+    this.model['discount'] = String(discountamount.toFixed(2))
     this.model['NetAmount'] = String((totalamount-discountamount).toFixed(2))
  }
 
@@ -380,6 +390,7 @@ if(disc>0){
   {
     this.processSale.getSale(SaleId).subscribe(data=>{
       this.model = data[0]['data'][0]
+      this.model['SchoolId']  =this.model['SchoolId'].toString();
       this.dataRows = data[1]['data']
       this.processSale.setOldDataRow(JSON.parse(JSON.stringify(data[1]['data'])))
     })

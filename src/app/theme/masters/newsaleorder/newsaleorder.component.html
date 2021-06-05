@@ -154,17 +154,27 @@
       <input type="number" min="0"  class="form-control" (change)="update1(rowIndex,'disc',$event.target.value)" [value]="value">
     </ng-template>
   </ngx-datatable-column>
-  <ngx-datatable-column name="Quantity" prop="Quantity">
+  <ngx-datatable-column name="Qty" prop="Quantity">
     <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="row" let-value="value">
       <input type="number" min="0"  class="form-control" (change)="update1(rowIndex,'Quantity',$event.target.value)" [value]="value">
     </ng-template>
   </ngx-datatable-column>
-  <ngx-datatable-column name="Tax(%)" prop="tex_rate">
+  <!-- <ngx-datatable-column name="Tax(%)" prop="tex_rate">
     <ng-template let-row="row" ngx-datatable-cell-template>
       {{row['tex_rate']}}
     </ng-template>
+  </ngx-datatable-column> -->
+  <ngx-datatable-column name="CGST(%)" prop="tex_rate">
+    <ng-template let-row="row" ngx-datatable-cell-template>
+      {{row['tex_rate']/2}}
+    </ng-template>
   </ngx-datatable-column>
-  <ngx-datatable-column name="Amount(incl. tax)" prop="NetPrice">
+  <ngx-datatable-column name="SGST(%)" prop="tex_rate">
+    <ng-template let-row="row" ngx-datatable-cell-template>
+      {{row['tex_rate']/2}}
+    </ng-template>
+  </ngx-datatable-column>
+  <ngx-datatable-column name="Amount" prop="NetPrice">
     <ng-template ngx-datatable-cell-template let-row="row">
       {{row['NetPrice']}}
     </ng-template>

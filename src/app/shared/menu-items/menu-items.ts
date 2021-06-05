@@ -37,12 +37,27 @@ const MENUITEMS = [
     label: '',
     main: [
       {
-        state: 'item',
+        state: 'forms',
         short_label: 'P',
         main_state: 'forms',
-        name: 'Add Item',
-        type: 'link',
+        name: 'Master',
+        type: 'sub',
         icon: 'ti-pencil-alt',
+        children: [
+          {
+            state: 'item',
+            name: 'Add Item',
+          }, {
+            state: 'party',
+            name: 'Add party'
+          }, {
+            state: 'school',
+            name: 'Add Customer'
+          }, {
+            state: 'validation',
+            name: 'Validation'
+          }
+        ],
         badge: [
           {
             type: 'warning',
@@ -51,45 +66,43 @@ const MENUITEMS = [
         ]
       },
       {
-        state: 'party',
-        short_label: 'S',
+        state: 'forms',
         main_state: 'forms',
-        name: 'Add party',
-        type: 'link',
-        icon: 'ti-shortcode'
+        name: 'Browser',
+        type: 'sub',
+        icon: 'ti-pencil-alt',
+        children: [
+          {
+            state: 'itemreport',
+            name: 'Item',
+          }, {
+            state: 'partyreport',
+            name: 'Party'
+          }, {
+            state: 'schoolbrowser',
+            name: 'Customer'
+          }
+        ]
+       
       },
       {
-        state: 'purchase',
-        short_label: 'FW',
+        state: 'forms',
         main_state: 'forms',
-        name: 'purchase order',
-        type: 'link',
-        icon: 'ti-crown'
+        name: 'Purchase',
+        type: 'sub',
+        icon: 'ti-pencil-alt',
+        children: [
+          {
+            state: 'purchase',
+            name: 'Purchase Entry',
+          }, {
+            state: 'purchasereport',
+            name: 'Purchase Browser'
+          }
+        ]
+       
       },
-      {
-        state: 'itemreport',
-        short_label: 'FW',
-        main_state: 'forms',
-        name: 'item report',
-        type: 'link',
-        icon: 'ti-crown'
-      },
-      {
-        state: 'purchasereport',
-        short_label: 'FW',
-        main_state: 'forms',
-        name: 'Purchase report',
-        type: 'link',
-        icon: 'ti-crown'
-      },
-      {
-        state: 'partyreport',
-        short_label: 'FW',
-        main_state: 'forms',
-        name: 'Party report',
-        type: 'link',
-        icon: 'ti-crown'
-      },
+      
       // {
       //   state: 'list',
       //   short_label: 'FW',
@@ -118,7 +131,7 @@ const MENUITEMS = [
         state: 'saleorder',
         short_label: 'FW',
         main_state: '',
-        name: 'Sale Order',
+        name: 'Sale Order ',
         type: 'link',
         icon: 'ti-crown'
       },{
@@ -129,22 +142,7 @@ const MENUITEMS = [
         type: 'link',
         icon: 'ti-crown'
       },
-      {
-        state: 'school',
-        short_label: 'FW',
-        main_state: '',
-        name: 'Customer',
-        type: 'link',
-        icon: 'ti-crown'
-      },
-      {
-        state: 'schoolbrowser',
-        short_label: 'FW',
-        main_state: '',
-        name: 'Customer Browser',
-        type: 'link',
-        icon: 'ti-crown'
-      },
+     
       {
         state: 'taxreport',
         short_label: 'FW',

@@ -9,11 +9,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 const routes : Routes = [{
   path : '',
   component : NewsaleorderComponent,
-  data : {
-    title : 'Saler Order',
-    icon : 'ti-layers',
-    status : true
-  }
+
 }]
 
 @NgModule({

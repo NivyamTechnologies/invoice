@@ -101,11 +101,11 @@ const routes: Routes = [
         loadChildren : './theme/masters/newsaleorder/newsaleorder.module#NewsaleorderModule'
       },
       {
-        path : 'school',
+        path : 'forms/school',
         loadChildren : './theme/masters/school/school.module#SchoolModule'
       },
       {
-        path : 'schoolbrowser',
+        path : 'forms/schoolbrowser',
         loadChildren : './theme/browsers/school-browser/school-browser.module#SchoolBrowserModule'
       },
       {

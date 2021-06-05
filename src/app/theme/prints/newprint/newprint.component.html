@@ -6,7 +6,7 @@
   </div>
   <br>
 
-  <div id="invoice" *ngIf = 'cname != "sangal & sons"'>
+  <div id="invoice" *ngIf = 'cname != "Sangal & Sons Food Product"'>
     <div style="border: 1px solid black; height: 100%;">
       <div class="row" style="padding-top: 5px; margin-left: 2mm; margin-right: 2mm;">
         <h6 style="margin-right: auto;">GSTIN : {{company['GSTIN']}}</h6>
@@ -118,7 +118,7 @@
         <div class="col-sm-6" style="border-right: 1px solid black; padding-top: 2mm; padding-bottom: 2mm;">
           <div class="row shiftBlock" style="margin: 0mm;">
             <div class="col-5"><i><h6>Billed to : </h6></i></div>
-            <div class="col-5"><i><h6>{{model['CustomerName']}}</h6></i></div>
+            <div class="col-7"><i><h6>{{model['CustomerName']}}</h6></i></div>
           
           </div>
           <div class="row shiftBlock" style="margin: 0mm;">
@@ -168,7 +168,7 @@
         <div class="col-sm-6" style="padding-top: 2mm; padding-bottom: 2mm;">
           <div class="row" style="margin: 0mm;">
             <div class="col-5"><i><h6>Shipped to.  :</h6></i></div>
-            <div class="col-5"><i><h6>{{model['CustomerName']}}</h6></i></div>
+            <div class="col-7"><i><h6>{{model['CustomerName']}}</h6></i></div>
           </div>
           <div class="row shiftBlock" style="margin: 0mm;">
             <div class="col-5">
@@ -333,7 +333,7 @@
     </div>
   </div>
 
-  <div id="invoice"   *ngIf = 'cname == "sangal & sons"'>
+  <div id="invoice"   *ngIf = 'cname == "Sangal & Sons Food Product"'>
     <div style="border: 1px solid black;">
       <div class="row" style="padding-top: 5px; margin-left: 2mm; margin-right: 2mm;">
         <h6 style="margin-right: auto;">GSTIN : {{company['GSTIN']}}</h6>
@@ -382,15 +382,7 @@
             {{company['State']}}
           </div>
           </div>
-          <div class="row shiftBlock" style="margin: 0mm;">
-          <div class="col-5">
-              Reverse Charge
-          </div>
-          :
-          <div class="col-5">
-              N
-          </div>
-          </div>
+     
         </div>
         <div class="col-sm-6" style="padding-top: 2mm; padding-bottom: 2mm;">
           <div class="row" style="margin: 0mm;">
@@ -420,24 +412,18 @@
               
           </div>
           </div>
+        
+
           <div class="row" style="margin: 0mm;">
           <div class="col-5">
-              Station
+            Mobile No
           </div>
           :
           <div class="col-5">
-              
+            {{school['Contact']}}
           </div>
           </div>
-          <div class="row" style="margin: 0mm;">
-          <div class="col-5">
-              E-Way Bill No.
-          </div>
-          : {{school['EwayBillNo']}}
-          <div class="col-5">
-              
-          </div>
-          </div>
+  
         </div>
       </div>
       
@@ -445,7 +431,7 @@
         <div class="col-sm-6" style="border-right: 1px solid black; padding-top: 2mm; padding-bottom: 2mm;">
           <div class="row shiftBlock" style="margin: 0mm;">
             <div class="col-5"><i><h6>Billed to : </h6></i></div>
-            <div class="col-5"><i><h6>{{model['CustomerName']}}</h6></i></div>
+            <div class="col-7"><i><h6>{{model['CustomerName']}}</h6></i></div>
           
           </div>
           <div class="row shiftBlock" style="margin: 0mm;">
@@ -466,20 +452,12 @@
             {{school['gstno']}}
           </div>
           </div>
-          <div class="row shiftBlock" style="margin: 0mm;">
-            <div class="col-5">
-                Mobile No
-            </div>
-            :
-            <div class="col-5">
-              {{school['Contact']}}
-            </div>
-            </div>
+  
         </div>
         <div class="col-sm-6" style="padding-top: 2mm; padding-bottom: 2mm;">
           <div class="row" style="margin: 0mm;">
             <div class="col-5"><i><h6>Shipped to.  :</h6></i></div>
-            <div class="col-5"><i><h6>{{model['CustomerName']}}</h6></i></div>
+            <div class="col-7"><i><h6>{{model['CustomerName']}}</h6></i></div>
           </div>
           <div class="row shiftBlock" style="margin: 0mm;">
             <div class="col-5">
@@ -696,7 +674,7 @@
         <div class="col-sm-6" style="border-right: 1px solid black; padding-top: 2mm; padding-bottom: 2mm;">
           <div class="row shiftBlock" style="margin: 0mm;">
             <div class="col-5"><i><h6>Billed to : </h6></i></div>
-            <div class="col-5"><i><h6>{{model['CustomerName']}}</h6></i></div>
+            <div class="col-7"><i><h6>{{model['CustomerName']}}</h6></i></div>
           
           </div>
           <div class="row shiftBlock" style="margin: 0mm;">
@@ -730,7 +708,7 @@
         <div class="col-sm-6" style="padding-top: 2mm; padding-bottom: 2mm;">
           <div class="row" style="margin: 0mm;">
             <div class="col-5"><i><h6>Shipped to.  :</h6></i></div>
-            <div class="col-5"><i><h6>{{model['CustomerName']}}</h6></i></div>
+            <div class="col-7"><i><h6>{{model['CustomerName']}}</h6></i></div>
           </div>
           <div class="row shiftBlock" style="margin: 0mm;">
             <div class="col-5">

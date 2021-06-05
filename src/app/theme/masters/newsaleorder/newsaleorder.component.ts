@@ -41,6 +41,7 @@ export class NewsaleorderComponent implements OnInit {
   title="New Sale"
 totaldiscount=0;
 batchlist=[]
+company:any;
   model = {
     SaleId : '',
     CustomerName : '',
@@ -69,12 +70,20 @@ batchlist=[]
 
   getSchoolList()
   {
-    let qry = "Select SchoolId,SchoolName,discount from t_school_master order by SchoolId"
+    let qry = "Select SchoolId,SchoolName,gstno from t_school_master order by SchoolId"
     this.api.Post("/users/executeSelectStatement",{Query : qry}).subscribe(school=>{
       this.SchoolList = school['data']
       this.model['SchoolId'] = this.SchoolList[0]['SchoolId']
       this.model['CustomerName'] = this.SchoolList[0]['SchoolName']
-      console.log("Item List :",school)
+      let qry = "Select GSTIN from t_company_master"
+      this.api.Post("/users/executeSelectStatement",{Query : qry}).subscribe((data)=>{
+        
+        this.company = data['data'][0];
+
+       
+      })
+      
+
      })
 
    
@@ -115,6 +124,15 @@ let i =  this.model.SchoolId;
 
 this.model['CustomerName'] = this.SchoolList.filter(x => x.SchoolId== i)[0].SchoolName;
 
+// let gstno = this.SchoolList.filter(x => x.SchoolId== i)[0].gstno;
+
+// if(gstno.slice(0, 2)==this.company['GSTIN'].slice(0, 2)){
+//   this.model['taxtype'] = 'cgst';
+
+// }
+// else{
+//   this.model['taxtype'] = 'igst';
+// }
 
 }
 

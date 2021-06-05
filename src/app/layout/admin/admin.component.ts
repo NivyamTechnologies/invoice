@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {animate, AUTO_STYLE, state, style, transition, trigger} from '@angular/animations';
 import {MenuItems} from '../../shared/menu-items/menu-items';
-
+import {ApicallService} from '../../theme/apicall.service'
+import { Router,ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
@@ -65,6 +66,35 @@ import {MenuItems} from '../../shared/menu-items/menu-items';
   ]
 })
 export class AdminComponent implements OnInit {
+  
+  myvar:any = {ItemId: null,
+    ItemName:null,
+    ItemMrp:null,
+    HsnCode:null,
+    Qty:null,
+    Catagory:null,
+    purchaseprice:null,
+    setcode:null,
+    ItemCode:null,
+    PartyId:null,
+    Active:null
+  
+  
+  }
+  model = {
+    "SchoolId" : '',
+    "SchoolName" : '',
+    "Address" : '',
+    "Contact" : '',
+    "discount" : '',
+    "gstno" : '',
+    "panno" : '',
+    "AadharNo":null,
+  "VichleNo":null,
+  "GRRNo":null,
+  "EwayBillNo":null
+  }
+  sch:any;
   public navType: string;
   public themeLayout: string;
   public verticalPlacement: string;
@@ -119,7 +149,7 @@ export class AdminComponent implements OnInit {
 
   public config: any;
 
-  constructor(public menuItems: MenuItems) {
+  constructor(public menuItems: MenuItems,private tData:ApicallService,private route : Router) {
     this.navType = 'st2';
     this.themeLayout = 'vertical';
     this.verticalPlacement = 'left';
@@ -188,6 +218,74 @@ export class AdminComponent implements OnInit {
   ngOnInit() {
     this.setBackgroundPattern('pattern1');
     /*document.querySelector('body').classList.remove('dark');*/
+
+
+
+
+    
+  }
+saveitem(){
+  debugger
+  this.tData.modiy(this.myvar,this.myvar.ItemId).subscribe(res=>{
+    console.log(res);
+    
+    if(res['data']=="data save"){
+      alert("Saved Item");
+    }
+   
+
+  },e=>{
+    console.log(e)
+    if(e['error']['message'].indexOf('Duplicate entry') != -1){
+      alert('Fees already generated for this class and section')
+    }
+    else if(e['error']['message'].indexOf('cannot be null') != -1){
+     alert( e['error']['message'].slice(19,100))
+    }
+    else{
+    alert("Error Try again")}
+  })
+}
+submit(){
+  if(this.isValid())
+  {
+    this.tData.saveMasterDefinition("School",{t_school_master : [this.model]}).subscribe(()=>{
+      alert("customer saved")
+   // this.route.navigateByUrl('/schoolbrowser')
+    },err=>{
+      alert("Error while saving customer")
+    })
+  }
+}
+  isValid()
+  {
+   
+    let valid = true
+    let message = ""
+    if(this.model['SchoolName'] == "")
+    {
+      message += "customer Name can't be empty\n"
+      valid = false
+    }
+    var regx= "^[0-9]{2}[A-Z]{5}"
+    "[0-9]{4}[A-Z]{1}["
+    "1-9A-Z]{1}Z[0-9A-Z]{1}$";
+    if(this.model['gstno'] != ""){
+    if (this.model['gstno'] .match(regx)) {
+      
+    } else {
+      message += "Gst No is not valid\n"
+      valid = false
+    }
+  }
+   
+
+    if(!valid)
+    {
+      alert(message)
+    }
+
+    return valid
   }
 
   onResize(event) {

@@ -11,13 +11,14 @@ import 'rxjs/add/operator/map'
   providedIn: 'root'
 })
 export class ApicallService {
-  serIP='52.66.198.183:3000'
- // serIP = 'localhost:3000'
-  ProfileId = 'sangalsons'
+  //serIP='52.66.198.183:3000'
+  serIP = 'localhost:3000'
+ //ProfileId = 'sangalsons'
+ProfileId = 'testnivyam'
   constructor(private http: HttpClient,private datepipe:DatePipe) { }
 
 
-
+ 
   modiy(data,id){
     let body
     let url = 'http://'+this.serIP+'/users/saveItem?ProfileId='+this.ProfileId+'&EntityId=&EntityName=item&Type=1'
@@ -41,7 +42,7 @@ export class ApicallService {
   }  
   savepurchase(data,id){
     let body
-    let url = 'http://'+this.serIP+'/users/savepurchase?ProfileId='+this.ProfileId+'&EntityId=&EntityName=t_doc_detail&Type=1&Partyid='+data[1]+'&total='+data[0]+'&date='+data[2]+'&BillNo='+data[3]
+    let url = 'http://'+this.serIP+'/users/savepurchase?ProfileId='+this.ProfileId+'&EntityId=&EntityName=t_doc_detail&Type=1&Partyid='+data[1]+'&total='+data[0]+'&date='+data[2]+'&BillNo='+data[3]+'&taxamount='+data[4]
     //let url = 192.168.0.233:3002/master/saveGridMaster?ProfileId=100000&EntityId=220000&EntityName=avc&Type=abx
     body = {DataToUpdate: id}
     return this.http.post(url,body)

@@ -97,8 +97,24 @@ const routes: Routes = [
         loadChildren : './theme/browsers/sale-browser/sale-browser.module#SaleBrowserModule'
       },
       {
+        path : 'schallanbrowser',
+        loadChildren : './theme/browsers/schallanbrowser/schallanbrowser.module#SchallanbrowserModule'
+      },
+      {
+        path : 'purchasechaalanbrowser',
+        loadChildren : './theme/browsers/purchasechallan/purchasechallan.module#PurchasechallanModule'
+      },
+      {
         path : 'saleorder',
         loadChildren : './theme/masters/newsaleorder/newsaleorder.module#NewsaleorderModule'
+      },
+      {
+        path : 'salechallan',
+        loadChildren : './theme/masters/salechallan/salechallan.module#SalechallanModule'
+      },
+      {
+        path : 'purchasechaalan',
+        loadChildren : './theme/masters/purchaseentry/purchaseentry.module#PurchaseentryModule'
       },
       {
         path : 'forms/school',

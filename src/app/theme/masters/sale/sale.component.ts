@@ -22,7 +22,7 @@ export class SaleComponent implements OnInit{
         this.model['SaleId'] = params['SaleId']
         if(this.SaleType == "Edit")
         {
-          this.getSale(this.model['SaleId'])
+          this.getSale(this.model['SaleId'],params['DocNo'])
         }
         
       }
@@ -256,9 +256,9 @@ export class SaleComponent implements OnInit{
 
 
   // Get sale detail of specific SaleId
-  getSale(SaleId)
+  getSale(SaleId,DocNo)
   {
-    this.saleUpdate.getSale(SaleId).subscribe(data=>{
+    this.saleUpdate.getSale(SaleId,DocNo).subscribe(data=>{
       console.log("sale data : ",data)
       console.log(data)
       this.model = data[0]['data'][0]

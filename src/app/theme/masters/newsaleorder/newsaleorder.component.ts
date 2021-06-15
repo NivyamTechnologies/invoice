@@ -18,7 +18,7 @@ export class NewsaleorderComponent implements OnInit {
       {
         this.Type="EditSale"
         this.title="Edit Sale"
-        this.getSaleDetail(params['SaleId'])
+        this.getSaleDetail(params['SaleId'],params['DocNo'])
       }
       else
       {
@@ -46,10 +46,10 @@ company:any;
     SaleId : '',
     CustomerName : '',
     SchoolId : '',
+    DocNo : '27',
     TotalAmount : '',
     discount : '',
     NetAmount : '',
-    ListId : -1,
     CreatedDate : '',
     taxtype:'cgst',
     taxamount:'',
@@ -73,9 +73,13 @@ company:any;
     let qry = "Select SchoolId,SchoolName,gstno from t_school_master order by SchoolId"
     this.api.Post("/users/executeSelectStatement",{Query : qry}).subscribe(school=>{
       this.SchoolList = school['data']
+      if(  this.Type=="EditSale")
+      this.customerchange();
+      else{
       this.model['SchoolId'] = this.SchoolList[0]['SchoolId']
       this.model['CustomerName'] = this.SchoolList[0]['SchoolName']
       let qry = "Select GSTIN from t_company_master"
+      this.customerchange();
       this.api.Post("/users/executeSelectStatement",{Query : qry}).subscribe((data)=>{
         
         this.company = data['data'][0];
@@ -83,7 +87,7 @@ company:any;
        
       })
       
-
+    }
      })
 
    
@@ -95,6 +99,7 @@ company:any;
       'ItemId' : this.ItemList[0]['ItemId'],
       'rate' : this.ItemList[0]['rate'],
       'Quantity' : 1,
+      'freeqty':0,
       'disc' : 0,
       'discrate':0,
       'HsnCode' : this.ItemList[0]['HsnCode'],
@@ -144,7 +149,7 @@ this.model['CustomerName'] = this.SchoolList.filter(x => x.SchoolId== i)[0].Scho
     left join  t_doc_detail item on i.ItemId =item.ItemId where item.ItemId=${value} group by item.ItemId )
     as x
     left join ( select   sale.ItemId ItemId,sum(ifnull(sale.Quantity,0)) SaleQty 
-    from  t_sale_detail sale where sale.ItemId=${value} group by sale.ItemId) as y on x.ItemId = y.ItemId 
+    from  t_sale_detail sale where sale.ItemId=${value}  group by sale.ItemId) as y on x.ItemId = y.ItemId 
     order by balance desc`
     this.api.Post("/users/executeSelectStatement",{Query : qry}).subscribe(itemstock=>{
      let data = itemstock['data']
@@ -293,6 +298,7 @@ if(disc>0){
     let tax_amount = (rate * (tax)/100)
     this.dataRows[index]['NetPrice'] = String(((rate+tax_amount)*quantity).toFixed(2))
     this.dataRows[index]['taxamount'] = String((tax_amount*quantity).toFixed(2))
+    this.dataRows[index]['DocNo'] = '27'
     this.dataRows = [...this.dataRows]
     this.updateTotaltax()
     this.updateTotalAmount()
@@ -404,9 +410,9 @@ if(disc>0){
   //////////////////////////////////////////////////////////////////////////////////////////////
   //for updating Sale
 
-  getSaleDetail(SaleId)
+  getSaleDetail(SaleId,DocNo)
   {
-    this.processSale.getSale(SaleId).subscribe(data=>{
+    this.processSale.getSale(SaleId,DocNo).subscribe(data=>{
       this.model = data[0]['data'][0]
       this.model['SchoolId']  =this.model['SchoolId'].toString();
       this.dataRows = data[1]['data']

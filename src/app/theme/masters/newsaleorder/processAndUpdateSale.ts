@@ -24,9 +24,9 @@ export class SaleOrderProcess
         this.saveSale.updateItemMaster()
     }
 
-    getSale(SaleId)
+    getSale(SaleId,DocNo)
     {
-        return this.updateSale.getSale(SaleId)
+        return this.updateSale.getSale(SaleId,DocNo)
     }
 
     setOldDataRow(OldData = [])

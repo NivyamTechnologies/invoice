@@ -3,25 +3,18 @@
     <app-modal-basic #modalLarge [dialogClass]="'modal-lg'">
         <div class="app-modal-header">
             <h4 class="modal-title">Add Item</h4>
+            <button type="button" class="btn btn-default"
+            (click)="saveitem();modalLarge.hide()">Save</button>
             <button type="button" class="close basic-close" (click)="modalLarge.hide()">
                 <span aria-hidden="true">&times;</span>
             </button>
+          
         </div>
         <div class="app-modal-body" style="text-align: center;overflow-x:auto;">
            
             <div class="card-block">
 
                 <div class="row">
-                    <!-- <label class="col-sm-2 col-lg-2 col-form-label">Item Id</label>
-                    <div class="col-sm-4 col-lg-4">
-                        <div class="input-group">
-                            <span class="input-group-prepend">
-                                                                        <label class="input-group-text"><i class="icofont icofont-ui-volume"></i></label>
-                                                                      </span>
-                            <input type="text" disabled [(ngModel)]="myvar.ItemId" class="form-control" placeholder="ItemId">
-                        </div>
-                    </div> -->
-
                     <label class="col-sm-2 col-lg-2 col-form-label">Item Name</label>
                     <div class="col-sm-6 col-lg-6">
                         <div class="input-group">

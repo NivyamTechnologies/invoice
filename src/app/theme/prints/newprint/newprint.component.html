@@ -484,6 +484,7 @@
             <th>Description of Goods</th>
             <th>HSN Code</th>
             <th>Qty.</th>
+            <th>Free Qty</th>
             <!-- <th>Unit</th> -->
             <th>Price</th>
             <!-- <th>Discount</th> -->
@@ -498,6 +499,7 @@
             <td>{{data.ItemName}}</td>
             <td>{{data.HsnCode}}</td>
             <td>{{data.Quantity}}</td>
+            <td>{{data.freeqty}}</td>
             <!-- <td>{{data.unit}}</td> -->
             <td>{{data.rate}}</td>
             <!-- <td>{{data.discount}}</td> -->
@@ -512,7 +514,7 @@
             <td><p style="text-align: center; margin: 0mm;">{{model['NetAmount']}}</p><p style="text-align: end; padding-right: 13px; margin-bottom: 2mm;">0.02</p></td>
           </tr> -->
           <tr>
-            <td colspan="6"><span style="float: right; padding-right: 1mm;">₹</span></td>
+            <td colspan="7"><span style="float: right; padding-right: 1mm;">₹</span></td>
             <td>{{model['NetAmount'] | number:'1.0-0'}}</td>
           </tr>
         </table>
@@ -735,6 +737,7 @@
             <th>Description of Goods</th>
             <th>HSN Code</th>
             <th>Qty.</th>
+            <th >Free Qty</th>
             <!-- <th>Unit</th> -->
             <th>Price</th>
             <!-- <th>Discount</th> -->
@@ -749,6 +752,7 @@
             <td>{{data.ItemName}}</td>
             <td>{{data.HsnCode}}</td>
             <td>{{data.Quantity}}</td>
+            <td>{{data.freeqty}}</td>
             <!-- <td>{{data.unit}}</td> -->
             <td>{{data.rate}}</td>
             <!-- <td>{{data.discount}}</td> -->
@@ -763,7 +767,7 @@
             <td><p style="text-align: center; margin: 0mm;">{{model['NetAmount']}}</p><p style="text-align: end; padding-right: 13px; margin-bottom: 2mm;">0.02</p></td>
           </tr> -->
           <tr>
-            <td colspan="6"><span style="float: right; padding-right: 1mm;">₹</span></td>
+            <td colspan="7"><span style="float: right; padding-right: 1mm;">₹</span></td>
             <td>{{model['NetAmount'] | number:'1.0-0'}}</td>
           </tr>
         </table>

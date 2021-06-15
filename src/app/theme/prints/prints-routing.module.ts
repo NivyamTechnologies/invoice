@@ -9,20 +9,12 @@ const routes : Routes = [{
         {
             path : 'invoice',
             component : InvoiceComponent,
-            data : {
-                title : 'Invoice',
-                icon : 'ti-layers',
-                status : true
-            }
+           
         },
         {
             path : 'newprint',
             component : NewprintComponent,
-            data : {
-                title : 'Newprint',
-                icon : 'ti-layers',
-                status : true
-            }
+           
         }
     ]
 }]

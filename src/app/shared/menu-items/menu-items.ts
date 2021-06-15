@@ -102,31 +102,6 @@ const MENUITEMS = [
         ]
        
       },
-      
-      // {
-      //   state: 'list',
-      //   short_label: 'FW',
-      //   main_state: '',
-      //   name: 'List',
-      //   type: 'link',
-      //   icon: 'ti-crown'
-      // },
-      // {
-      //   state: 'listbrowser',
-      //   short_label: 'FW',
-      //   main_state: '',
-      //   name: 'List Browser',
-      //   type: 'link',
-      //   icon: 'ti-crown'
-      // },
-      // {
-      //   state: 'sale',
-      //   short_label: 'FW',
-      //   main_state: '',
-      //   name: 'Sale',
-      //   type: 'link',
-      //   icon: 'ti-crown'
-      // }, 
       {
         state: 'saleorder',
         short_label: 'FW',
@@ -139,6 +114,37 @@ const MENUITEMS = [
         short_label: 'FW',
         main_state: '',
         name: 'Sale Browser',
+        type: 'link',
+        icon: 'ti-crown'
+      },
+      {
+        state: 'salechallan',
+        short_label: 'FW',
+        main_state: '',
+        name: 'Sale Challan ',
+        type: 'link',
+        icon: 'ti-crown'
+      },{
+        state: 'schallanbrowser',
+        short_label: 'FW',
+        main_state: '',
+        name: 'Sale Challan Browser',
+        type: 'link',
+        icon: 'ti-crown'
+      },
+      {
+        state: 'purchasechaalan',
+        short_label: 'FW',
+        main_state: '',
+        name: 'Purchase Challan',
+        type: 'link',
+        icon: 'ti-crown'
+      },
+      {
+        state: 'purchasechaalanbrowser',
+        short_label: 'FW',
+        main_state: '',
+        name: 'Purchase Challan Browser',
         type: 'link',
         icon: 'ti-crown'
       },

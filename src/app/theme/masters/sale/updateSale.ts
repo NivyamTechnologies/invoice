@@ -6,9 +6,9 @@ export class updateSale
 
     current = new Current()
     oldDataRows = []
-    getSale(SaleId)
+    getSale(SaleId,DocNo)
     {
-        let qry = 'Select * from t_sale_master where SaleId = '+SaleId+";select t1.*,t2.ItemName,t2.Qty,t2.SetCode,HsnCode from t_sale_detail t1 inner join item t2 on t1.ItemId = t2.ItemId where t1.SaleId =  "+SaleId
+        let qry = 'Select * from t_sale_master where DocNo='+DocNo+' and SaleId = '+SaleId+";select t1.*,t2.ItemName,t2.Qty,t2.SetCode,HsnCode from t_sale_detail t1 inner join item t2 on t1.ItemId = t2.ItemId where t1.DocNo="+DocNo+" and t1.SaleId =  "+SaleId
         
         return this.api.Get("/total/execMultipleQuery",["Query="+qry])
     }
@@ -31,7 +31,7 @@ export class updateSale
     //Delete Items of specifice SaleId in t_sale_detail
     updateSaleDetail(SaleId=-1)
     {
-        let deleteQry = "Delete from t_sale_detail where SaleId = "+SaleId
+        let deleteQry = "Delete from t_sale_detail where DocNo=27 and SaleId = "+SaleId
         console.log("deelet qry for sale detail",deleteQry)
         return this.api.Post("/users/executeSelectStatement",{Query : deleteQry})
     }

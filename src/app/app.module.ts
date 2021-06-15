@@ -13,6 +13,7 @@ import {MenuItems} from './shared/menu-items/menu-items';
 import {BreadcrumbsComponent} from './layout/admin/breadcrumbs/breadcrumbs.component';
 import { DatePipe } from '@angular/common';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,6 +21,8 @@ import { DatePipe } from '@angular/common';
     AuthComponent,
     BreadcrumbsComponent,
     
+    
+        
     
   ],
   imports: [

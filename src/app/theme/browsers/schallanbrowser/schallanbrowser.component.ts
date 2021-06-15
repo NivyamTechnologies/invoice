@@ -2,12 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { ApicallService } from '../../apicall.service';
 import { Router } from '@angular/router';
 
+
 @Component({
-  selector: 'sale-browser',
-  templateUrl: './sale-browser.component.html',
-  styleUrls: ['./sale-browser.component.scss']
+  selector: 'app-schallanbrowser',
+  templateUrl: './schallanbrowser.component.html',
+  styleUrls: ['./schallanbrowser.component.scss']
 })
-export class SaleBrowserComponent implements OnInit {
+export class SchallanbrowserComponent implements OnInit {
 
   constructor(private api : ApicallService, private route : Router) { }
 
@@ -19,7 +20,7 @@ export class SaleBrowserComponent implements OnInit {
   dataColumns = [
     {name : 'Customer Name',prop : 'CustomerName'},
     {name : 'Id', prop : 'SchoolId'},
-    {name : 'ListId', prop : 'ListId'},
+
     {name : 'Total Amount', prop : 'TotalAmount'},
     {name : 'Discount', prop : 'discount'},
     {name : 'Net Price', prop : 'NetPrice'},
@@ -29,7 +30,7 @@ export class SaleBrowserComponent implements OnInit {
   getdata()
   {
    
-    this.api.Post("/total/getBrowser",{Condition : "where DocNo=27 "},["EntityName=Sale"]).subscribe(data=>{
+    this.api.Post("/total/getBrowser",{Condition : "where DocNo=28 "},["EntityName=Sale"]).subscribe(data=>{
       // this.dataRows = data['data']
       console.log("browserdata",data)
       this.dataColumns = data['Columns']
@@ -41,14 +42,14 @@ export class SaleBrowserComponent implements OnInit {
   editSale(row)
   {
    
-     let route='/saleorder'
+   let   route='/salechallan'
     
-    this.route.navigate([route,{SaleId : row['SaleId'],DocNo:'27'}])
+    this.route.navigate([route,{SaleId : row['SaleId'],DocNo:'28'}])
   }
 
   deleteSale(SaleId,rowIndex)
   {
-    let qry = "Delete from t_sale_master where DocNo=27 and SaleId = "+SaleId
+    let qry = "Delete from t_sale_master where DocNo=28 and SaleId = "+SaleId
     this.api.Post("/users/executeSelectStatement",{Query : qry}).subscribe(()=>{
       alert("Sale delete Successfully")
       this.dataRows.splice(rowIndex,1)
@@ -58,7 +59,7 @@ export class SaleBrowserComponent implements OnInit {
 
   exportToExcel()
   {
-    let qry = "Select * from t_sale_master where DocNo=27"
+    let qry = "Select * from t_sale_master where DocNo=28"
     this.api.Post("/users/executeSelectStatement",{Query : qry}).subscribe((data)=>{
       console.log(data)
       this.api.exportToExcel(data['data'],"Sale")

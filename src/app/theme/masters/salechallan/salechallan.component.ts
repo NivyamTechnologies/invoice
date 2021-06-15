@@ -45,11 +45,10 @@ company:any;
     SaleId : '',
     CustomerName : '',
     SchoolId : '',
-    DocNo : '27',
+    DocNo : '28',
     TotalAmount : '',
     discount : '',
     NetAmount : '',
-    ListId : -1,
     CreatedDate : '',
     taxtype:'cgst',
     taxamount:'',
@@ -298,7 +297,7 @@ if(disc>0){
     let tax_amount = (rate * (tax)/100)
     this.dataRows[index]['NetPrice'] = String(((rate+tax_amount)*quantity).toFixed(2))
     this.dataRows[index]['taxamount'] = String((tax_amount*quantity).toFixed(2))
-    this.dataRows[index]['DocNo'] = '27'
+    this.dataRows[index]['DocNo'] = '28'
     this.dataRows = [...this.dataRows]
     this.updateTotaltax()
     this.updateTotalAmount()

@@ -18,7 +18,7 @@ export class PurchaseentryComponent implements OnInit {
       {
         this.Type="EditSale"
         this.title="Edit Sale"
-        this.getSaleDetail(params['SaleId'],params['DocNo'])
+        this.getSaleDetail(params['SaleId'],params['DocId'])
       }
       else
       {
@@ -47,9 +47,10 @@ company:any;
     DocId : '45',
     DocNo : '',
     PartyId : '',
-    total : '',
+    Total : '',
     DocDate : '',
-    BillNo:''
+    BillNo:'',
+    taxamount:''
   }
   
   saveSale = new ProcessSale(this.api)
@@ -69,9 +70,11 @@ company:any;
     let qry = "Select PartyId, PartyName from party"
     this.api.Post("/users/executeSelectStatement",{Query : qry}).subscribe(school=>{
       this.SchoolList = school['data']
-    
+      if(  this.Type=="EditSale"){
+
+      }else{
       this.model['PartyId'] = this.SchoolList[0]['PartyId']
-  
+      }
      
      
       
@@ -213,7 +216,7 @@ if(disc>0){
     this.dataRows.forEach(row=>{
       totalamount += Number(row['netrate'])
     })
-    this.model['total'] = String(totalamount.toFixed(2))
+    this.model['Total'] = String(totalamount.toFixed(2))
     
     
   }
@@ -286,7 +289,7 @@ if(disc>0){
   processNewSale()
   { 
     
-   let header =[this.model.total,this.model['PartyId'],this.model['DocDate'],this.BillNo];
+   let header =[this.model.Total,this.model['PartyId'],this.model['DocDate'],this.BillNo,this.model['taxamount']];
     this.api.savepurchase(header,this.dataRows).subscribe(res=>{
       if(res){
         alert("Saved Document")
@@ -298,14 +301,20 @@ if(disc>0){
   }
   //////////////////////////////////////////////////////////////////////////////////////////////
   //for updating Sale
-
+  getpurchase(SaleId,DocNo)
+  {
+      let qry = 'Select * from t_doc_header where DocId='+DocNo+' and DocNo = '+SaleId+";select t1.*,t2.ItemName from t_doc_detail t1 inner join item t2 on t1.ItemId = t2.ItemId where t1.DocId="+DocNo+" and t1.DocNo =  "+SaleId
+      console.log(qry);
+      return this.api.Get("/total/execMultipleQuery",["Query="+qry])
+  }
   getSaleDetail(SaleId,DocNo)
   {
-    this.processSale.getSale(SaleId,DocNo).subscribe(data=>{
+    this.getpurchase(SaleId,DocNo).subscribe(data=>{
       this.model = data[0]['data'][0]
-      this.model['SchoolId']  =this.model['SchoolId'].toString();
+      this.model['PartyId']  =this.model['PartyId'];
+      this.BillNo = this.model['BillNo'];
       this.dataRows = data[1]['data']
-      this.processSale.setOldDataRow(JSON.parse(JSON.stringify(data[1]['data'])))
+    
     })
   }
 

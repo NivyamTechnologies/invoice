@@ -49,10 +49,63 @@
             (click)="modalLarge.hide()">Close</button>
     </div>
     <div class="app-modal-footer">
-        <button (click)="sumbitbatch();modalLarge.hide()" type="button" class="btn btn-primary">Save</button>
+        <button id="openModalButton" (click)="sumbitbatch();modalLarge.show()" type="button" class="btn btn-primary">Save</button>
     </div>
 </app-modal-basic>
   
+<app-modal-basic #modalchallan [dialogClass]="'modal-lg'">
+  <div class="app-modal-header">
+      <h4 class="modal-title">Challan List.</h4>
+      <button type="button" class="close basic-close" (click)="modalchallan.hide()">
+          <span aria-hidden="true">&times;</span>
+      </button>
+  </div>
+  <div class="app-modal-body"  style="text-align: center">
+    <ngx-datatable 
+    class="data-table"
+    [rows]="challanlist"
+    [columnMode]="'force'" 
+    [headerHeight]="50"  
+    [rowHeight]="45" 
+    [scrollbarH]="true" 
+    [limit]="50"
+    [selected]="selected"
+      [selectionType]="'checkbox'" 
+      [selectAllRowsOnPage]="true"  (select)='onSelect($event)'>
+
+    <ngx-datatable-column name="Select" [width]="35" [sortable]="false" [canAutoResize]="false" [draggable]="true" [resizeable]="false" [headerCheckboxable]="true" [checkboxable]="true">
+    </ngx-datatable-column>
+    <ngx-datatable-column [sortable]="false" name="SaleId"  prop="SaleId" width="60">
+      <ng-template let-row="row" let-value="value" let-rowIndex="rowIndex" ngx-datatable-cell-template>
+        {{row['SaleId']}}
+      </ng-template>
+    </ngx-datatable-column> 
+    <ngx-datatable-column [sortable]="false" name="TotalAmount"  prop="TotalAmount" width="60">
+      <ng-template let-row="row" let-value="value" let-rowIndex="rowIndex" ngx-datatable-cell-template>
+        {{row['TotalAmount']}}
+      </ng-template>
+    </ngx-datatable-column> 
+    <ngx-datatable-column [sortable]="false" name="Date"  prop="CreatedDate" width="60">
+      <ng-template let-row="row" let-value="value" let-rowIndex="rowIndex" ngx-datatable-cell-template>
+        {{row['CreatedDate']}}
+      </ng-template>
+    </ngx-datatable-column> 
+
+
+</ngx-datatable>
+
+
+  </div>
+  <div class="app-modal-footer">
+      <button type="button" class="btn btn-default waves-effect"
+          (click)="modalchallan.hide()">Close</button>
+  </div>
+  <div class="app-modal-footer">
+    <button  (click)="submitchallan();modalchallan.hide()" type="button" class="btn btn-primary">Save</button>
+      <button id="openModalChallan" (click)="modalchallan.show()" type="button" class="btn btn-primary"></button>
+  </div>
+</app-modal-basic>
+
  <form #SaleOrder="ngForm" (ngSubmit)="submit()">
    <div class="row">
      <div class="col-lg-2 col-md-2 col-sm-4 col-xs-12">
@@ -112,6 +165,9 @@
   <div style="margin:2%;">
     <button class="btn btn-sm btn-success" (click)="addrow()">
       Add Row
+    </button>
+    <button  style="margin:2%;" class="btn btn-sm btn-warning" (click)="challan()">
+      Check Challan
     </button>
   </div>
 

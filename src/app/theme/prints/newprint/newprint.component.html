@@ -214,10 +214,12 @@
             <!-- <th>Unit</th> -->
             <th>Price</th>
             <!-- <th>Discount</th> -->
-            <th>Tax(%)</th>
-            <!-- <th>CGST Amount</th>
-            <th>SGST Rate</th>
-            <th>SGST Amount</th> -->
+            <th  *ngIf="model.taxtype!='igst'">CGST %</th>
+            <th  *ngIf="model.taxtype!='igst'">CGST Amount</th>
+            <th  *ngIf="model.taxtype!='igst'">SGST %</th>
+            <th  *ngIf="model.taxtype!='igst'">SGST Amount</th>
+            <th  *ngIf="model.taxtype=='igst'">IGST %</th>
+            <th  *ngIf="model.taxtype=='igst'">IGST Amount</th>
             <th>Amount(₹)</th>
           </tr>
           <tr *ngFor = 'let data of dataRows, let i = index'>
@@ -228,19 +230,25 @@
             <!-- <td>{{data.unit}}</td> -->
             <td>{{data.rate}}</td>
             <!-- <td>{{data.discount}}</td> -->
-            <td>{{data.tex_rate}}</td>
-            <!-- <td>{{data.cgstamnt}}</td>
-            <td>{{data.sgstrate}}</td>
-            <td>{{data.sgstamnt}}</td> -->
+            <td *ngIf="model.taxtype!='igst'">{{data.tex_rate/2}}</td>
+            <td *ngIf="model.taxtype!='igst'">{{data.taxamount/2}}</td>
+            <td *ngIf="model.taxtype!='igst'">{{data.tex_rate/2}}</td>
+            <td *ngIf="model.taxtype!='igst'">{{data.taxamount/2}}</td>
+            <td *ngIf="model.taxtype=='igst'">{{data.tex_rate}}</td>
+            <td *ngIf="model.taxtype=='igst'">{{data.taxamount}}</td>
             <td>{{data.NetPrice}}</td>
           </tr>
           <!-- <tr>
             <td colspan="10" style="text-align: center;"><i>Less : Rounded Off(*)</i></td>
-            <td><p style="text-align: center; margin: 0mm;">{{model['NetAmount']}}</p><p style="text-align: end; padding-right: 13px; margin-bottom: 2mm;">0.02</p></td>
+            <td><p style="text-align: end; padding-right: 13px; margin-bottom: 2mm;">0.02</p></td>
           </tr> -->
-          <tr>
-            <td colspan="6"><span style="float: right; padding-right: 1mm;">₹</span></td>
-            <td>{{model['NetAmount'] | number:'1.0-0'}}</td>
+          <tr *ngIf="model.taxtype=='igst'">
+            <td colspan="7" style="text-align: center;"><i></i></td>
+            <td>₹ {{model['NetAmount'] | number:'1.0-0'}}</td>
+          </tr>
+          <tr *ngIf="model.taxtype!='igst'">
+            <td colspan="9" style="text-align: center;"><i></i></td>
+            <td>₹ {{model['NetAmount'] | number:'1.0-0'}}</td>
           </tr>
         </table>
         <div   id="footer"  *ngIf = 'count == "first"' >
@@ -249,8 +257,9 @@
               <!-- <p class="col-2" style="margin-bottom: 1mm;">HSN/SAC</p> -->
               <p class="col-2" style="margin-bottom: 1mm;">Tax Rate</p>
               <p class="col-2" style="padding: 0mm; margin-bottom: 1mm;">Discount</p>
-              <p class="col-2" style="margin-bottom: 1mm;">CGST</p>
-              <p class="col-2" style="margin-bottom: 1mm;">SGST</p>
+              <p  class="col-2" style="margin-bottom: 1mm;" *ngIf="model.taxtype!='igst'">CGST</p>
+              <p  class="col-2" style="margin-bottom: 1mm;" *ngIf="model.taxtype!='igst'">SGST</p>
+              <p  class="col-2" style="margin-bottom: 1mm;" *ngIf="model.taxtype=='igst'">IGST</p>
               <p class="col-2" style="margin-bottom: 1mm;">Total Tax</p>
             </div>
             
@@ -258,14 +267,15 @@
               <!-- <p class="col-2" style="margin-bottom: 1mm;">{{data[0]['HsnCode']}}</p> -->
               <p class="col-2" style="margin-bottom: 1mm;">{{tax['tex_rate']}}%</p>
               <p class="col-2" style="padding: 0mm; margin-bottom: 1mm;">{{tax['discount']}}</p>
-              <p class="col-2" style="margin-bottom: 1mm;">{{tax['taxamount']/2}}</p>
-              <p class="col-2" style="margin-bottom: 1mm;">{{tax['taxamount']/2}}</p>
+              <p class="col-2" style="margin-bottom: 1mm;" *ngIf="model.taxtype!='igst'">{{tax['taxamount']/2}}</p>
+              <p class="col-2" style="margin-bottom: 1mm;" *ngIf="model.taxtype!='igst'">{{tax['taxamount']/2}}</p>
+              <p class="col-2" style="margin-bottom: 1mm;" *ngIf="model.taxtype=='igst'">{{tax['taxamount']}}</p>
               <p class="col-2" style="margin-bottom: 1mm;">{{tax['taxamount']}}</p>
             </div>
           </div>
           <div style="margin: 3mm;">
             <!-- Total Tax Amount:  -->
-            <!-- <h6> INR Rupees Five Lakh Forty Two Thousand Six Hundred Thirty Only</h6> -->
+            <h6>{{words}}</h6>
           </div>
             <div class="row" style="border: 1px solid black; margin: 0mm;">
               <div class="col-6 ">
@@ -273,7 +283,7 @@
                 <p style="margin: 0mm;">E.& O.E.</p>
                 <p style="margin: 0mm;">1. Goods once sold will not be taken back.</p>
                 <p style="margin: 0mm;">2. Interest @ 18% p.a. will be charged if the payment is not made in the stipulated time.</p>
-                <p style="margin: 0mm;">3. Subject to 'BAGHPAT' Jurisdiction only.</p>
+                <p style="margin: 0mm;">3. Subject to '{{company['Jurisdiction']}}' Jurisdiction only.</p>
               </div>
               <div class="col-6" style="padding-top: 2mm; padding-left: 0mm; padding-right: 0mm; padding-bottom: 4mm;">
                 <div style="border-bottom: 1px solid black; height: 15mm; padding-left: 2mm;">
@@ -293,23 +303,24 @@
                <!-- <p class="col-2" style="margin-bottom: 1mm;">HSN/SAC</p> -->
                <p class="col-2" style="margin-bottom: 1mm;">Tax Rate</p>
                <p class="col-2" style="padding: 0mm; margin-bottom: 1mm;">Discount</p>
-               <p class="col-2" style="margin-bottom: 1mm;">CGST</p>
-               <p class="col-2" style="margin-bottom: 1mm;">SGST</p>
-               <p class="col-2" style="margin-bottom: 1mm;">Total Tax</p>
-             </div>
-             
-             <div class="col-7 row" style="margin: 0mm;" *ngFor = 'let tax of taxdata' >
-               <!-- <p class="col-2" style="margin-bottom: 1mm;">{{data[0]['HsnCode']}}</p> -->
-               <p class="col-2" style="margin-bottom: 1mm;">{{tax['tex_rate']}}%</p>
-               <p class="col-2" style="padding: 0mm; margin-bottom: 1mm;">{{tax['discount']}}</p>
-               <p class="col-2" style="margin-bottom: 1mm;">{{tax['taxamount']/2}}</p>
-               <p class="col-2" style="margin-bottom: 1mm;">{{tax['taxamount']/2}}</p>
-               <p class="col-2" style="margin-bottom: 1mm;">{{tax['taxamount']}}</p>
+               <p  class="col-2" style="margin-bottom: 1mm;" *ngIf="model.taxtype!='igst'">CGST</p>
+              <p  class="col-2" style="margin-bottom: 1mm;" *ngIf="model.taxtype!='igst'">SGST</p>
+              <p  class="col-2" style="margin-bottom: 1mm;" *ngIf="model.taxtype=='igst'">IGST</p>
+              <p class="col-2" style="margin-bottom: 1mm;">Total Tax</p>
+            </div>
+            
+            <div class="col-7 row" style="margin: 0mm;" *ngFor = 'let tax of taxdata' >
+              <!-- <p class="col-2" style="margin-bottom: 1mm;">{{data[0]['HsnCode']}}</p> -->
+              <p class="col-2" style="margin-bottom: 1mm;">{{tax['tex_rate']}}%</p>
+              <p class="col-2" style="padding: 0mm; margin-bottom: 1mm;">{{tax['discount']}}</p>
+              <p class="col-2" style="margin-bottom: 1mm;" *ngIf="model.taxtype!='igst'">{{tax['taxamount']/2}}</p>
+              <p class="col-2" style="margin-bottom: 1mm;" *ngIf="model.taxtype!='igst'">{{tax['taxamount']/2}}</p>
+              <p class="col-2" style="margin-bottom: 1mm;" *ngIf="model.taxtype=='igst'">{{tax['taxamount']}}</p>
+              <p class="col-2" style="margin-bottom: 1mm;">{{tax['taxamount']}}</p>
              </div>
           </div>
           <div style="margin: 3mm;">
-            <!-- <h6>Rupees Five Lakh Forty Two Thousand Six Hundred Thirty Only</h6>
-           -->
+            <h6>{{words}}</h6>
           </div>
             <div class="row" style="border: 1px solid black; margin: 0mm;">
               <div class="col-6 ">
@@ -317,7 +328,7 @@
                 <p style="margin: 0mm;">E.& O.E.</p>
                 <p style="margin: 0mm;">1. Goods once sold will not be taken back.</p>
                 <p style="margin: 0mm;">2. Interest @ 18% p.a. will be charged if the payment is not made in the stipulated time.</p>
-                <p style="margin: 0mm;">3. Subject to 'BAGHPAT' Jurisdiction only.</p>
+                <p style="margin: 0mm;">3. Subject to '{{company['Jurisdiction']}}' Jurisdiction only.</p>
               </div>
               <div class="col-6" style="padding-top: 2mm; padding-left: 0mm; padding-right: 0mm; padding-bottom: 4mm;">
                 <div style="border-bottom: 1px solid black; height: 15mm; padding-left: 2mm;">

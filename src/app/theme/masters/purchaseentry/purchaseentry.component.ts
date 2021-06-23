@@ -91,6 +91,7 @@ company:any;
       'rate' : this.ItemList[0]['purchaseprice'],
       'dis' : 0,
       'Qty' : 1,
+      'batch_no':'',
       'netrate' : this.ItemList[0]['purchaseprice'],
       'tex_rate' : this.ItemList[0]['tex_rate'],
       'taxvalue' : this.ItemList[0]['taxvalue']
@@ -204,7 +205,7 @@ if(disc>0){
     this.dataRows[index]['netrate'] = String(((rate)*quantity).toFixed(2))
     this.dataRows[index]['totalamount'] = String(((rate+tax_amount)*quantity).toFixed(2))
     this.dataRows[index]['taxamount'] = String((tax_amount*quantity).toFixed(2))
-
+    this.dataRows[index]['DocId'] =45
     this.dataRows = [...this.dataRows]
     this.updateTotaltax()
     this.updateTotalAmount()

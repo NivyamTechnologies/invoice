@@ -22,7 +22,9 @@ export class NewprintComponent implements OnInit, OnDestroy {
       this.dataRows = JSON.parse(localStorage.getItem("invoice"))['table'] // getting item data from the invoice data
       this.getschooldetail(this.model['SaleId'])
       this.gettaxdata(this.model['SaleId']);
-
+     let amount = Math.round(this.model['NetAmount'])
+      this.words = this.api.numberToWords(amount )
+this.roundoff = amount-this.model['NetAmount'] ;
 
     }
 
@@ -38,7 +40,8 @@ export class NewprintComponent implements OnInit, OnDestroy {
    {
      localStorage.removeItem("invoice") // clear localstorage when leaving invoice page
    }
-
+roundoff:any;
+words:any;
    model = {}
   company = {}
   school={}

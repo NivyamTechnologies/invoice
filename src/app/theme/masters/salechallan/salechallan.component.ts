@@ -395,7 +395,7 @@ if(disc>0){
       this.processSale.insertintoSaleDetail(this.dataRows,SaleId).subscribe(data=>{
         this.model['SaleId']= String(SaleId)
         alert("Sale Processed\nSale Id : "+SaleId)
-        this.route.navigateByUrl("/salebrowser")
+        this.route.navigateByUrl("/schallanbrowser")
       },err=>{
         console.log("Error while inserting into sale detail")
       })
@@ -430,7 +430,7 @@ if(disc>0){
       this.processSale.insertintoSaleDetail(this.dataRows,this.model['SaleId']).subscribe(data=>{
         console.log("new rows inserted into datarows")
         alert("Sale detail updated")
-        this.route.navigateByUrl("/salebrowser")
+        this.route.navigateByUrl("/schallanbrowser")
       })
     })
 

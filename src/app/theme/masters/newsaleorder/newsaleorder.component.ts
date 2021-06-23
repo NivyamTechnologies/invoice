@@ -33,6 +33,7 @@ export class NewsaleorderComponent implements OnInit {
     this.getSchoolList()
 
   }
+  challanlist=[]
   ItemList = []
   SchoolList = []
   dataRows = []
@@ -67,6 +68,53 @@ company:any;
      console.log("Item List :",item)
     })
   }
+  challan(){
+    this.challanlist =[]
+  let qry = `Select SaleId,TotalAmount,CreatedDate from t_sale_master where DocNo='28' and SchoolId = ${this.model['SchoolId']}` 
+        
+  this.api.Post("/users/executeSelectStatement",{Query : qry}).subscribe(challan=>{
+   this.challanlist = challan['data']
+   if(this.challanlist.length>0)
+   document.getElementById("openModalChallan").click();
+  })
+
+}
+submitchallan(){
+  if(this.selected.length>0){
+    debugger
+    for(let i=0;i<this.selected.length;i++){
+    let qry = `Select * from t_sale_detail where DocNo='28' and SaleId in (${this.selected[i].SaleId})` 
+        
+    this.api.Post("/users/executeSelectStatement",{Query : qry}).subscribe(challan=>{
+     let challan1 = challan['data']
+   challan1.forEach(challan=>{
+     let saleDetailModel = {
+      'ItemId' : challan['ItemId'],
+      'rate' : challan['rate'],
+      'Quantity' : challan['Quantity'],
+      'freeqty':0,
+      'disc' : challan['disc'],
+      'discrate':challan['discrate'],
+      'HsnCode' : '',
+      'Qty' : challan['Quantity'],
+      'NetPrice' : challan['rate'],
+      'tex_rate' : challan['tex_rate'],
+      'taxamount' : challan['taxamount']
+    }
+  
+    this.dataRows.push(saleDetailModel)
+    this.dataRows = [...this.dataRows]
+    this.updateNetPrice(this.dataRows.length-1)
+    this.updateTotalAmount()
+   })
+  })
+
+
+    }
+
+  }
+
+}
 
   getSchoolList()
   {
@@ -358,22 +406,22 @@ if(disc>0){
     let valid = true
     let errorMessage = ""
     this.totaldiscount=0;
-    this.dataRows.forEach(row=>{
-      let count = 0
+    //this.dataRows.forEach(row=>{
+    //  let count = 0
     
     //  this.totaldiscount = this.totaldiscount;//+row['discrate'];
-      this.dataRows.forEach(nextRow=>{
-          if(Number(row['ItemId']) == Number(nextRow['ItemId']))
-          {
-            count++;
-          }
-          if(count > 1)
-          {
-            valid = false;
-            errorMessage ="Multiple Item with same name"
-          }
-      })
-    })
+      // this.dataRows.forEach(nextRow=>{
+      //     if(Number(row['ItemId']) == Number(nextRow['ItemId']))
+      //     {
+      //       count++;
+      //     }
+      //     if(count > 1)
+      //     {
+      //       valid = false;
+      //       errorMessage ="Multiple Item with same name"
+      //     }
+      // })
+    //})
     if(this.model['CustomerName']=='')
     {
       valid = false;

@@ -11,10 +11,12 @@ import 'rxjs/add/operator/map'
   providedIn: 'root'
 })
 export class ApicallService {
-  //serIP='52.66.198.183:3000'
-  serIP = 'localhost:3000'
- //ProfileId = 'sangalsons'
-ProfileId = 'testnivyam'
+  serIP='52.66.198.183:3000'
+
+  
+  //serIP = 'localhost:3000'
+ //ProfileId = 'total'
+  ProfileId = 'testnivyam'
   constructor(private http: HttpClient,private datepipe:DatePipe) { }
 
 
@@ -128,5 +130,73 @@ ProfileId = 'testnivyam'
     });
     FileSaver.saveAs(data, fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION);
     // alert("Exporting to Excel")
+  }
+  
+   numberToWords(num) {
+    const first = [
+      "",
+      "One ",
+      "Two ",
+      "Three ",
+      "Four ",
+      "Five ",
+      "Six ",
+      "Seven ",
+      "Eight ",
+      "Nine ",
+      "Ten ",
+      "Eleven ",
+      "Twelve ",
+      "Thirteen ",
+      "Fourteen ",
+      "Fifteen ",
+      "Sixteen ",
+      "Seventeen ",
+      "Eighteen ",
+      "Nineteen ",
+    ];
+    const tens = [
+      "",
+      "",
+      "Twenty",
+      "Thirty",
+      "Forty",
+      "Fifty",
+      "Sixty",
+      "Seventy",
+      "Eighty",
+      "Ninety",
+    ];
+    const mad = ["", "Thousand", "Million", "Billion", "Trillion"];
+    let word = "";
+
+    for (let i = 0; i < mad.length; i++) {
+      let tempNumber = num % (100 * Math.pow(1000, i));
+      if (Math.floor(tempNumber / Math.pow(1000, i)) !== 0) {
+        if (Math.floor(tempNumber / Math.pow(1000, i)) < 20) {
+          word =
+            first[Math.floor(tempNumber / Math.pow(1000, i))] +
+            mad[i] +
+            " " +
+            word;
+        } else {
+          word =
+            tens[Math.floor(tempNumber / (10 * Math.pow(1000, i)))] +
+            "-" +
+            first[Math.floor(tempNumber / Math.pow(1000, i)) % 10] +
+            mad[i] +
+            " " +
+            word;
+        }
+      }
+
+      tempNumber = num % Math.pow(1000, i + 1);
+      if (Math.floor(tempNumber / (100 * Math.pow(1000, i))) !== 0)
+        word =
+          first[Math.floor(tempNumber / (100 * Math.pow(1000, i)))] +
+          "Hunderd " +
+          word;
+    }
+    return word;
   }
 }

@@ -85,23 +85,23 @@ const MENUITEMS = [
         ]
        
       },
-      {
-        state: 'forms',
-        main_state: 'forms',
-        name: 'Purchase',
-        type: 'sub',
-        icon: 'ti-pencil-alt',
-        children: [
-          {
-            state: 'purchase',
-            name: 'Purchase Entry',
-          }, {
-            state: 'purchasereport',
-            name: 'Purchase Browser'
-          }
-        ]
+      // {
+      //   state: 'forms',
+      //   main_state: 'forms',
+      //   name: 'Purchase',
+      //   type: 'sub',
+      //   icon: 'ti-pencil-alt',
+      //   children: [
+      //     {
+      //       state: 'purchase',
+      //       name: 'Purchase Entry',
+      //     }, {
+      //       state: 'purchasereport',
+      //       name: 'Purchase Browser'
+      //     }
+      //   ]
        
-      },
+      // },
       {
         state: 'saleorder',
         short_label: 'FW',
@@ -136,7 +136,7 @@ const MENUITEMS = [
         state: 'purchasechaalan',
         short_label: 'FW',
         main_state: '',
-        name: 'Purchase Challan',
+        name: 'Purchase Order',
         type: 'link',
         icon: 'ti-crown'
       },
@@ -144,7 +144,7 @@ const MENUITEMS = [
         state: 'purchasechaalanbrowser',
         short_label: 'FW',
         main_state: '',
-        name: 'Purchase Challan Browser',
+        name: 'Purchase Order Browser',
         type: 'link',
         icon: 'ti-crown'
       },

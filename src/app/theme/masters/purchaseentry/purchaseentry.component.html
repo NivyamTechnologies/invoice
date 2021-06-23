@@ -8,7 +8,7 @@
       Select Party
     </div>
     <div class=" col-md-3 col-sm-3 ">
-      <select class="form-control" name="PartyId" (change)="customerchange()"  [(ngModel)]="model['PartyId']" >
+      <select class="form-control" name="PartyId" [(ngModel)]="model['PartyId']" >
         <option *ngFor="let school of SchoolList" [value]="school['PartyId']">
           {{school['PartyName']}}
         </option>
@@ -73,7 +73,7 @@
   <ngx-datatable-column name="Batch"  prop='batch_no' [sortable]="false" width="100"> 
     <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
 
-        <input class="form-control form-control-sm" autofocus (blur)="update1($event, 'batch_no', rowIndex)" type="text" [value]="value" />       </ng-template>
+        <input class="form-control form-control-sm" autofocus (blur)="update1(rowIndex,'batch_no',$event.target.value)" type="text" [value]="value" />       </ng-template>
 </ngx-datatable-column>
 
   <ngx-datatable-column name="Amount" prop="netrate">
@@ -108,7 +108,7 @@
       </div>
     </div>    
 
-    <div style="text-align: center;margin:2%">
+    <div style="text-align: center;margin:2%" *ngIf="Type!='EditSale'">
       <button type="submit" class="btn btn-success" [disabled]="dataRows.length==0">Purchase</button>
     </div>
 

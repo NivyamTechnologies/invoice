@@ -70,6 +70,11 @@
       <input type="number" min="0"  class="form-control" (change)="update1(rowIndex,'Qty',$event.target.value)" [value]="value">
     </ng-template>
   </ngx-datatable-column>
+  <ngx-datatable-column name="Gst%" prop="tex_rate" width="100">
+    <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="row" let-value="value">
+      <input type="number" min="0"  class="form-control" (change)="update1(rowIndex,'tex_rate',$event.target.value)" [value]="value">
+    </ng-template>
+  </ngx-datatable-column>
   <ngx-datatable-column name="Batch"  prop='batch_no' [sortable]="false" width="100"> 
     <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
 

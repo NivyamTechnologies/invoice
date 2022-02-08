@@ -176,7 +176,7 @@ company:any;
        
         this.dataRows[index]['tex_rate'] = item['tex_rate']
         this.dataRows[index]['HsnCode'] = item['HsnCode']
-        // this.dataRows[index]['taxamount'] = Number( item['rate'])* Number(item['Qty'])
+        this.dataRows[index]['taxamount'] = Number( item['rate'])* Number(item['Qty'])
       }
     })
     this.updateNetPrice(index)
@@ -200,9 +200,8 @@ if(disc>0){
  
 
 }
-    let tax_amount = (rate * (tax)/100)
-    
-    this.dataRows[index]['netrate'] = String(((rate)*quantity).toFixed(2))
+    let tax_amount = (rate * (tax)/100)    
+    this.dataRows[index]['netrate'] = String(((rate+tax_amount)*quantity).toFixed(2))
     this.dataRows[index]['totalamount'] = String(((rate+tax_amount)*quantity).toFixed(2))
     this.dataRows[index]['taxamount'] = String((tax_amount*quantity).toFixed(2))
     this.dataRows[index]['DocId'] =45

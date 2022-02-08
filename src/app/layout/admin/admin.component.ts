@@ -394,6 +394,11 @@ submit(){
     }, 35);
   }
 
+
+  logout(){
+
+    this.route.navigateByUrl("/")
+  }
   searchOff() {
     const searchInterval = setInterval(() => {
       if (this.searchWidth <= 0) {

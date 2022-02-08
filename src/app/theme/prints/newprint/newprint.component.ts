@@ -1,6 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ApicallService } from '../../apicall.service';
-
+import jspdf from 'jspdf';
+import html2canvas from 'html2canvas';
+ 
 @Component({
   selector: 'app-newprint',
   templateUrl: './newprint.component.html',

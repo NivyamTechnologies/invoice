@@ -8,12 +8,7 @@ import { FormsModule } from '@angular/forms';
 const route : Routes  =  [
   {
     path : '',
-    component : AccountledgerComponent,
-    data : {
-      title: 'Account Ledger',
-      icon: 'ti-layers',
-      status: true
-    }
+    component : AccountledgerComponent
   }
 ]
 

@@ -13,15 +13,17 @@ export class LedgerBrowsersComponent implements OnInit {
 
   ngOnInit() {
     this.getLedgerType()
-    this.getLedgerBrowser()
+ 
   }
 
-  dataColumns = [{"name" : "Party Name", "prop" : "PartyName", "width" : "50"},
-  {"name" : "Amount", "prop" : "Amount", "width" : "50"},
-  {"name" : "Ledger Type", "prop" : "LedgerType", "width" : "30"},
-  {"name" : "Narration", "prop" : "Narration", "width" : "50"},
-  {"name" : "Mode", "prop" : "Mode", "width" : "30"},
-  {"name" : "Date", "prop" : "Date", "width" : "40"} 
+  dataColumns = [
+    {"name" : "Date", "prop" : "date", "width" : "40"}, 
+    {"name" : "Party", "prop" : "PartyId", "width" : "50"},
+    {"name" : "Narration", "prop" : "Narration", "width" : "50"},
+  {"name" : "Debit", "prop" : "total", "width" : "50"},
+  {"name" : "Credit", "prop" : "payment", "width" : "30"},
+  {"name" : "Balance", "prop" : "Balance", "width" : "30"},
+
 ]
   dataRows = []
   ledgerType  = ''
@@ -33,25 +35,26 @@ export class LedgerBrowsersComponent implements OnInit {
 
   getLedgerType()
   {
-    let qry = "Select distinct LedgerType from Payment"
+    let qry = "Select PartyId,PartyName  from party"
     this.api.Post("/users/executeSelectStatement",{Query : qry}).subscribe(res=>{
       console.log(res)
       this.LedgerTypes = res['data']
     },err=>{
-      alert("Error while fetching Ledger Types")
+      alert("Error while fetching party")
       this.LedgerTypes = []
     })
   }
 
   getLedgerBrowser()
   {
-    let condn = this.ledgerType !=''?"Where LedgerType='"+this.ledgerType+"'":"where 1=1"
-    this.api.Post("/total/getBrowser",{Condition : condn},["EntityName=LedgerBrowser"]).subscribe(data=>{
-      // this.dataRows = data['data']
-      console.log("browserdata",data)
-      this.dataColumns = data['Columns']
-      this.dataColumns = [...this.dataColumns]
-      this.dataRows = data['Data']['data']
+    let qry = `select * from (	select PartyId,total,0 payment,concat('Bill No  ',DocNo) Narration,DocDate date	from t_doc_header where PartyId=${this.ledgerType} UNION ALL select PartyId,0 total,Amount,Narration,Date date from  Payment  where PartyId=${this.ledgerType})v1  order by date`
+    this.api.Post("/users/executeSelectStatement",{Query : qry}).subscribe((data)=>{
+      let bb=0;
+      for(let data1 in data['data']){
+           bb=  bb+(data['data'][data1].total-data['data'][data1].payment)
+           data['data'][data1].Balance=(bb.toFixed(2))
+      }
+      this.dataRows = data['data']
       this.dataRows = [...this.dataRows]
     })
   }

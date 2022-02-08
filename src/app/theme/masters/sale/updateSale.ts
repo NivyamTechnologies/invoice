@@ -8,7 +8,7 @@ export class updateSale
     oldDataRows = []
     getSale(SaleId,DocNo)
     {
-        let qry = 'Select * from t_sale_master where DocNo='+DocNo+' and SaleId = '+SaleId+";select t1.*,t2.ItemName,t2.Qty,t2.SetCode,HsnCode from t_sale_detail t1 inner join item t2 on t1.ItemId = t2.ItemId where t1.DocNo="+DocNo+" and t1.SaleId =  "+SaleId
+        let qry = 'Select * from t_sale_master where DocNo='+DocNo+' and SaleId = '+SaleId+";select t1.*,t2.ItemName,t2.ItemCode,t2.Qty,t2.SetCode,HsnCode from t_sale_detail t1 inner join item t2 on t1.ItemId = t2.ItemId where t1.DocNo="+DocNo+" and t1.SaleId =  "+SaleId
         
         return this.api.Get("/total/execMultipleQuery",["Query="+qry])
     }

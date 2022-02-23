@@ -30,7 +30,7 @@ export class SchoolBrowserComponent implements OnInit {
 
   editSchool(row)
   {
-    this.route.navigate(['/school',{'SchoolId' : row['SchoolId']}])
+    this.route.navigate(['/forms/school',{'SchoolId' : row['SchoolId']}])
   }
 
   deleteSale(SchoolId,rowIndex)

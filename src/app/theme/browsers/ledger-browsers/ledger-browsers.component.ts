@@ -13,6 +13,7 @@ export class LedgerBrowsersComponent implements OnInit {
 
   ngOnInit() {
     this.getLedgerType()
+    this.getcustomer()
  
   }
 
@@ -27,7 +28,9 @@ export class LedgerBrowsersComponent implements OnInit {
 ]
   dataRows = []
   ledgerType  = ''
+  ledgerType1  = ''
   LedgerTypes = []
+  customerList=[]
   editLedger(row)
   {
     this.route.navigate(["/forms/accountledger",{'LedgerId' : row['LedgerId']}])
@@ -44,9 +47,31 @@ export class LedgerBrowsersComponent implements OnInit {
       this.LedgerTypes = []
     })
   }
+  getcustomer()
+  {
+    this.api.getList("Customer").subscribe((res)=>{
+      console.log(res['data'])
+      this.customerList = res['data']
+    },err=>{
+      console.log("error while getting list",err)
+    })
+  }
 
   getLedgerBrowser()
   {
+    debugger
+    if(this.ledgerType1!=""){
+      let qry = `select * from (	select SchoolId,NetAmount total,0 payment,concat('Bill No  ',DocNo) Narration,CreatedDate date	from t_sale_master where SchoolId=${this.ledgerType1} UNION ALL select CustomerId PartyId,0 total,Amount,Narration,Date date from  Payment  where CustomerId=${this.ledgerType1})v1  order by date`
+      this.api.Post("/users/executeSelectStatement",{Query : qry}).subscribe((data)=>{
+        let bb=0;
+        for(let data1 in data['data']){
+             bb=  bb+(data['data'][data1].total-data['data'][data1].payment)
+             data['data'][data1].Balance=(bb.toFixed(2))
+        }
+        this.dataRows = data['data']
+        this.dataRows = [...this.dataRows]
+      })
+    }else{
     let qry = `select * from (	select PartyId,total,0 payment,concat('Bill No  ',DocNo) Narration,DocDate date	from t_doc_header where PartyId=${this.ledgerType} UNION ALL select PartyId,0 total,Amount,Narration,Date date from  Payment  where PartyId=${this.ledgerType})v1  order by date`
     this.api.Post("/users/executeSelectStatement",{Query : qry}).subscribe((data)=>{
       let bb=0;
@@ -57,6 +82,7 @@ export class LedgerBrowsersComponent implements OnInit {
       this.dataRows = data['data']
       this.dataRows = [...this.dataRows]
     })
+  }
   }
 
   deleteLedger(LedgerId = "",index)
@@ -71,10 +97,8 @@ export class LedgerBrowsersComponent implements OnInit {
 
   exportToExcel()
   {
-    let qry = "Select * from Payment"
-    this.api.Post("/users/executeSelectStatement",{Query : qry}).subscribe((data)=>{
-      console.log(data)
-      this.api.exportToExcel(data['data'],"AccountLedger")
-    })
+
+      this.api.exportToExcel(this.dataRows,"AccountLedger")
+    
   }
 }

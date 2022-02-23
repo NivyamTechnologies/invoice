@@ -22,39 +22,49 @@ export class AccountledgerComponent implements OnInit {
 
   ngOnInit() {
     this.getParty() //Fetch the details from the Id in query params
+    this.getcustomer()
   }
 
   title = "Account Ledger"
   Type = "AddLedger"
   accountLedger = {
     LedgerId : '',
-    PartyId : '',
+    PartyId : '60000',
     Amount  : '',
     LedgerType : 'Pay',
     Narration : '',
     Mode : 'Bank',
     Date : '',
     CreatedDate : '',
-    ModifiedDate : ''
+    ModifiedDate : '',
+    CustomerId:''
   }
   current = new Current()
   models = {Amount : '',PartyId : '',Narration : ''}
   PartyList = []
+  customerList=[]
 
   getParty() // Fetch the details from Account Ledger
   {
+    debugger
     this.api.getList("Party").subscribe((res)=>{
       console.log(res['data'])
       this.PartyList = res['data']
-      if(this.Type!="EditLedger")
-      {
-        this.accountLedger['PartyId'] = res['data'][0]['Id']
-      }
+     
     },err=>{
       console.log("error while getting list",err)
     })
   }
 
+  getcustomer() // Fetch the details from Account Ledger
+  {
+    this.api.getList("Customer").subscribe((res)=>{
+      console.log(res['data'])
+      this.customerList = res['data']
+    },err=>{
+      console.log("error while getting list",err)
+    })
+  }
   getAccountLedger(LedgerId = -1)
   {
     let qry = "Select * from Payment where LedgerId = '"+LedgerId+"'"
@@ -88,6 +98,7 @@ export class AccountledgerComponent implements OnInit {
 
   saveAccountLedger() // save Account Ledger
   {
+    debugger
     this.accountLedger['CreatedDate'] = new Date().toISOString().split('T')[0] //cerated date = date on which ledger is save
     this.api.saveMasterDefinition("Ledger",{'Payment' : [this.accountLedger]}).subscribe((res)=>{
       console.log(res)

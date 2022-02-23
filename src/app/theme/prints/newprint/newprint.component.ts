@@ -71,11 +71,12 @@ cname: any;
 
   getschooldetail(id){
     debugger
-    let qry = `SELECT Address,gstno,panno,GRRNo,VichleNo,EwayBillNo,AadharNo,Contact FROM t_sale_master
-    left JOIN
-    t_school_master
-    on t_school_master.SchoolId =t_sale_master.SchoolId
-    where SaleId=${id}`
+    let qry = `SELECT Address,gstno,panno,GRRNo,VichleNo,EwayBillNo,AadharNo,Contact,
+    ifnull(shippaadharno,AadharNo) shippaadharno,Transport,ifnull(shippaddress,Address) shippaddress,ifnull(shippgstno,gstno) shippgstno ,ifnull(shipppanno, panno) shipppanno,ifnull(shippname, SchoolName) shippname  FROM t_sale_master
+        left JOIN
+        t_school_master
+        on t_school_master.SchoolId =t_sale_master.SchoolId
+    where SaleId=${id} and DocNo=${this.model['DocNo']}`
     this.api.Post("/users/executeSelectStatement",{Query : qry}).subscribe((data)=>{
       console.log(data)
       this.school = data['data'][0]

@@ -8,6 +8,13 @@
         <option *ngFor="let ledgertype of LedgerTypes" [value]="ledgertype['PartyId']">{{ledgertype['PartyName']}}</option>
       </select>
     </div>
+    
+    <div class="col-3">
+      <select class="form-control form-control-sm" [(ngModel)]="ledgerType1">
+        <option  [value]=""></option>
+        <option *ngFor="let ledgertype of customerList" [value]="ledgertype['Id']">{{ledgertype['Name']}}</option>
+      </select>
+    </div>
     <div class="col-2">
       <button class="btn btn-sm btn-primary" (click)="getLedgerBrowser()">Get Ledgers</button>
     </div>
@@ -37,7 +44,7 @@
   </ngx-datatable-column> -->
   </ngx-datatable>
 
-  <!-- <div style="text-align: right;margin-top : 2%">
+  <div style="text-align: right;margin-top : 2%">
     <button class="btn btn-primary btn-sm" (click)="exportToExcel()">Export</button>
-  </div> -->
+  </div>
 </app-card>

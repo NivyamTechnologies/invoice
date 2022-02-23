@@ -48,7 +48,8 @@ export class SaleBrowserComponent implements OnInit {
 
   deleteSale(SaleId,rowIndex)
   {
-    let qry = "Delete from t_sale_master where DocNo=27 and SaleId = "+SaleId
+    debugger
+    let qry = `Delete from t_sale_master where DocNo=27 and SaleId = ${SaleId};Delete from t_sale_detail where DocNo=27 and SaleId = ${SaleId};`
     this.api.Post("/users/executeSelectStatement",{Query : qry}).subscribe(()=>{
       alert("Sale delete Successfully")
       this.dataRows.splice(rowIndex,1)

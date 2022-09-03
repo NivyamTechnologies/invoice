@@ -11,12 +11,12 @@ import 'rxjs/add/operator/map'
   providedIn: 'root'
 })
 export class ApicallService {
-  serIP='myassuredness.com:3000'
+  serIP='myassuredness.in:3000'
 
   
   //serIP = 'localhost:3000'
- ProfileId = 'mansi'
- //ProfileId = 'total'
+ //ProfileId = 'mansi'
+ ProfileId = 'abhishek'
   constructor(private http: HttpClient,private datepipe:DatePipe) { }
 
 

@@ -190,6 +190,34 @@ const MENUITEMS = [
         type: 'link',
         icon: 'ti-crown'
       },
+      {
+        state: 'forms',
+        short_label: 'P',
+        main_state: 'forms',
+        name: 'CRM',
+        type: 'sub',
+        icon: 'ti-pencil-alt',
+        children: [
+          {
+            state: 'CrmCustomer',
+            name: 'Add CrmCustomer',
+          },
+          {
+            state: 'CrmCustomerBrowser',
+            name: 'CrmCustomer Browser',
+          } ,
+          {
+            state: 'CrmComplaintBrowser',
+            name: 'Complain Browser',
+          } 
+        ],
+        badge: [
+          {
+            type: 'warning',
+            value: 'New'
+          }
+        ]
+      }
 
     ]
   }

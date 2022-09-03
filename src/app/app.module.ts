@@ -14,12 +14,15 @@ import {BreadcrumbsComponent} from './layout/admin/breadcrumbs/breadcrumbs.compo
 import { DatePipe } from '@angular/common';
 
 
+
+
 @NgModule({
   declarations: [
     AppComponent,
     AdminComponent,
     AuthComponent,
-    BreadcrumbsComponent,
+    BreadcrumbsComponent
+    
     
     
         

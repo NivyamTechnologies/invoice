@@ -121,6 +121,22 @@ const routes: Routes = [
         loadChildren : './theme/masters/school/school.module#SchoolModule'
       },
       {
+        path : 'forms/CrmCustomer',
+        loadChildren : './theme/masters/crm-customer/crm-customer.module#CrmCustomerModule'
+      },
+      {
+        path : 'forms/CrmCustomerBrowser',
+        loadChildren : './theme/masters/crm-customer-browser/crm-customer-browser.module#CrmCustomerBrowserModule'
+      },
+      {
+        path : 'forms/CrmComplaint',
+        loadChildren : './theme/masters/crm-complaint//crm-complaint.module#CrmComplaintModule'
+      },
+      {
+        path : 'forms/CrmComplaintBrowser',
+        loadChildren : './theme/masters/crm-complaint-browser/crm-complaint-browser.module#CrmComplaintBrowserModule'
+      },
+      {
         path : 'forms/schoolbrowser',
         loadChildren : './theme/browsers/school-browser/school-browser.module#SchoolBrowserModule'
       },

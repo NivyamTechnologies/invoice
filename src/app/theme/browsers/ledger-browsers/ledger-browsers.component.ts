@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ApicallService } from '../../apicall.service';
 import { Router } from '@angular/router';
 
+
 @Component({
   selector: 'app-ledger-browsers',
   templateUrl: './ledger-browsers.component.html',
@@ -72,7 +73,11 @@ export class LedgerBrowsersComponent implements OnInit {
         this.dataRows = [...this.dataRows]
       })
     }else{
-    let qry = `select * from (	select PartyId,total,0 payment,concat('Bill No  ',DocNo) Narration,DocDate date	from t_doc_header where PartyId=${this.ledgerType} UNION ALL select PartyId,0 total,Amount,Narration,Date date from  Payment  where PartyId=${this.ledgerType})v1  order by date`
+    let qry = `select * from (	select (SELECT PartyName from party where partyId=${this.ledgerType}) PartyId,total,0 payment,concat('Bill No  ',DocNo)
+    Narration,DocDate date	from t_doc_header
+    where PartyId=${this.ledgerType}
+    UNION ALL select (select CompanyName from t_company_master)PartyId ,0 total,Amount,Narration,Date date from  Payment  where PartyId=${this.ledgerType} and LedgerType='Pay'
+     UNION ALL select(SELECT PartyName from party where partyId=${this.ledgerType}) PartyId, Amount,0 total,Narration,Date date from  Payment  where PartyId=${this.ledgerType} and LedgerType='Receive')v1  order by date`
     this.api.Post("/users/executeSelectStatement",{Query : qry}).subscribe((data)=>{
       let bb=0;
       for(let data1 in data['data']){
@@ -101,4 +106,6 @@ export class LedgerBrowsersComponent implements OnInit {
       this.api.exportToExcel(this.dataRows,"AccountLedger")
     
   }
+
+  
 }

@@ -35,16 +35,16 @@ export class SchoolComponent implements OnInit {
     "discount" : '',
     "gstno" : '',
     "panno" : '',
-    "AadharNo":null,
-  "VichleNo":null,
-  "GRRNo":null,
-  "EwayBillNo":null,
-  "shippaadharno":null,
+    "AadharNo":'',
+  "VichleNo":'',
+  "GRRNo":'',
+  "EwayBillNo":'',
+  "shippaadharno":'',
   "Transport":'',
-  "shippaddress":null,
-  "shippgstno":null,
-  "shipppanno":null,
-  "shippname":null
+  "shippaddress":'',
+  "shippgstno":'',
+  "shipppanno":'',
+  "shippname":''
 
   }
 

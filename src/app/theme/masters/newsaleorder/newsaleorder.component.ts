@@ -38,6 +38,7 @@ export class NewsaleorderComponent implements OnInit {
   SchoolList = []
   dataRows = []
   selected = [];
+  currentitem=''
   Type="NewSale"
   title="New Sale"
 totaldiscount=0;
@@ -62,7 +63,7 @@ company:any;
   
   getItemList()
   {
-    let qry = "Select ItemId,ItemName,Qty,rate,tex_rate,HsnCode from item where Active='Y'" 
+    let qry = "Select ItemId,ItemName,Qty,rate,tex_rate,HsnCode,purchaseprice from item where Active='Y'" 
     this.api.Post("/users/executeSelectStatement",{Query : qry}).subscribe(item=>{
      this.ItemList = item['data']
      console.log("Item List :",item)
@@ -121,8 +122,9 @@ submitchallan(){
     let qry = "Select SchoolId,SchoolName,gstno from t_school_master order by SchoolId"
     this.api.Post("/users/executeSelectStatement",{Query : qry}).subscribe(school=>{
       this.SchoolList = school['data']
-      if(  this.Type=="EditSale")
-      this.customerchange();
+      if(  this.Type=="EditSale"){
+
+      }
       else{
       this.model['SchoolId'] = this.SchoolList[0]['SchoolId']
       this.model['CustomerName'] = this.SchoolList[0]['SchoolName']
@@ -154,7 +156,8 @@ submitchallan(){
       'Qty' : this.ItemList[0]['Qty'],
       'NetPrice' : this.ItemList[0]['rate'],
       'tex_rate' : this.ItemList[0]['tex_rate'],
-      'taxamount' : this.ItemList[0]['taxamount']
+      'taxamount' : this.ItemList[0]['taxamount'],
+      'purchaseprice':this.ItemList[0]['purchaseprice']
     }
    debugger
     this.dataRows.push(saleDetailModel)
@@ -217,6 +220,7 @@ this.model['CustomerName'] = this.SchoolList.filter(x => x.SchoolId== i)[0].Scho
       this.dataRows[index][col] = value
       this.updateRow(index)
     }
+    this.currentitem =data[0].balance
     
     
     })
@@ -296,8 +300,8 @@ let row = this.selected[0].row;
       {
         
       
+        this.dataRows[index]['purchaseprice'] = item['purchaseprice']
         this.dataRows[index]['rate'] = item['rate']
-        
         this.dataRows[index]['Qty'] = item['Qty']
         this.dataRows[index]['tex_rate'] = item['tex_rate']
         this.dataRows[index]['HsnCode'] = item['HsnCode']
@@ -315,6 +319,11 @@ let row = this.selected[0].row;
     this.ItemList.forEach(item=>{
       if(item['ItemId'] == ItemId)
       {
+        if(this.dataRows[index]['Quantity']>this.currentitem){
+          this.dataRows[index]['Quantity']= this.currentitem
+
+          alert("item Stock is    "+this.currentitem)
+        }
         
         this.dataRows[index]['Qty'] = item['Qty']
         this.dataRows[index]['tex_rate'] = item['tex_rate']
@@ -379,7 +388,7 @@ if(disc>0){
     let discount = Number(this.model['discount'])
     let totalamount = Number(this.model['TotalAmount'])
     let discountamount = totalamount * (discount/100)
-    this.model['discount'] = String(discountamount.toFixed(2))
+  //  this.model['discount'] = String(discountamount.toFixed(2))
     this.model['NetAmount'] = String((totalamount-discountamount).toFixed(2))
  }
 

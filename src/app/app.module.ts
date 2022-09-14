@@ -15,13 +15,13 @@ import { DatePipe } from '@angular/common';
 
 
 
-
 @NgModule({
   declarations: [
     AppComponent,
     AdminComponent,
     AuthComponent,
-    BreadcrumbsComponent
+    BreadcrumbsComponent,
+    
     
     
     

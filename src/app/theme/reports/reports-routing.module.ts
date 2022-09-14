@@ -4,6 +4,7 @@ import { TaxReportComponent } from './tax-report/tax-report.component'
 import {StockreportComponent} from './stockreport/stockreport.component'
 import {StockvaluereportComponent} from './stockvaluereport/stockvaluereport.component'
 import { from } from 'rxjs'
+import { ServicelistComponent } from './servicelist/servicelist.component'
 
 const route : Routes = [
     {
@@ -33,6 +34,15 @@ const route : Routes = [
                 component : StockvaluereportComponent,
                 data : {
                     title : 'stock value Report',
+                    icon : 'ti-layers',
+                    status : true
+                }
+
+            },{
+                path : 'servicelist',
+                component : ServicelistComponent,
+                data : {
+                    title : 'Service Report',
                     icon : 'ti-layers',
                     status : true
                 }

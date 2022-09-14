@@ -191,6 +191,14 @@ const MENUITEMS = [
         icon: 'ti-crown'
       },
       {
+        state: 'servicelist',
+        short_label: 'FW',
+        main_state: 'reports',
+        name: 'CRM Service Report',
+        type: 'link',
+        icon: 'ti-crown'
+      },
+      {
         state: 'forms',
         short_label: 'P',
         main_state: 'forms',

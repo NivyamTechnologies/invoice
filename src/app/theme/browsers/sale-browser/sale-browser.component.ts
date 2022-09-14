@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApicallService } from '../../apicall.service';
 import { Router } from '@angular/router';
-
+import { SaleOrderProcess } from '../../masters/newsaleorder/processAndUpdateSale';
 @Component({
   selector: 'sale-browser',
   templateUrl: './sale-browser.component.html',
@@ -16,6 +16,9 @@ export class SaleBrowserComponent implements OnInit {
   }
 
   dataRows = []
+  model=[]
+  rows=[]
+  processSale = new SaleOrderProcess(this.api)
   dataColumns = [
     {name : 'Customer Name',prop : 'CustomerName'},
     {name : 'Id', prop : 'SchoolId'},
@@ -63,6 +66,19 @@ export class SaleBrowserComponent implements OnInit {
     this.api.Post("/users/executeSelectStatement",{Query : qry}).subscribe((data)=>{
       console.log(data)
       this.api.exportToExcel(data['data'],"Sale")
+    })
+  }
+
+  printsale(SaleId)
+  {
+      this.processSale.getSale(SaleId,27).subscribe(data=>{
+      this.model = data[0]['data'][0]
+      this.model['SchoolId']  =this.model['SchoolId'].toString();
+      this.rows = data[1]['data']
+      this.processSale.setOldDataRow(JSON.parse(JSON.stringify(data[1]['data'])))
+
+      localStorage.setItem("invoice",JSON.stringify({"form":this.model,"table":this.rows})) // storing data to print on invoice
+      this.route.navigateByUrl('/print/newprint') // taking to the invoice print page
     })
   }
 

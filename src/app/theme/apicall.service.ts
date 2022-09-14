@@ -16,7 +16,7 @@ export class ApicallService {
   
   //serIP = 'localhost:3000'
  //ProfileId = 'mansi'
- ProfileId = 'abhishek'
+ ProfileId = 'total'
   constructor(private http: HttpClient,private datepipe:DatePipe) { }
 
 

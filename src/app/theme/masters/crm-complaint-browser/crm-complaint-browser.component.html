@@ -2,7 +2,13 @@
 
   <div class="row">
     <div class="col-sm"></div>
-    <div class="col-sm"></div>
+    <div class="col-sm">
+      <select [(ngModel)]="statuselect"  (change)="getdata()" class="form-control form-control-sm">
+       <option value="Open">Open</option>
+        <option value="Pending">Pending</option>
+        <option value="close">Close</option>
+      </select>
+     </div>
     <div class="col-sm">
      <select [(ngModel)]="selectfield" class="form-control form-control-sm">
       <option value="complaint_id">complaint No.</option>

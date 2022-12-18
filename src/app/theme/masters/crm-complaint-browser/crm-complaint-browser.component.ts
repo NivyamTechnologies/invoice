@@ -17,11 +17,12 @@ export class CrmComplaintBrowserComponent implements OnInit {
   dataColumns = []
   dataRows = []
   selectfield='complaint_id'
+  statuselect ='Open'
   loading:boolean= false;
   txtz:any
   getdata()
-  {debugger
-    this.api.Post("/total/getBrowser",{Condition : "where 1=1"},["EntityName=CrmComplaint"]).subscribe(data=>{
+  {
+    this.api.Post("/total/getBrowser",{Condition : "where status='"+this.statuselect+"'"},["EntityName=CrmComplaint"]).subscribe(data=>{
       // this.dataRows = data['data']
       console.log("browserdata",data)
       this.dataColumns = data['Columns']
@@ -29,6 +30,7 @@ export class CrmComplaintBrowserComponent implements OnInit {
       this.dataRows = [...this.dataRows]
     })
   }
+
 
   editSchool(row)
   {
@@ -48,11 +50,9 @@ export class CrmComplaintBrowserComponent implements OnInit {
 
   exportToExcel()
   {
-    let qry = "Select * from customer"
-    this.api.Post("/users/executeSelectStatement",{Query : qry}).subscribe((data)=>{
-      console.log(data)
-      this.api.exportToExcel(data['data'],"School")
-    })
+    
+      this.api.exportToExcel( this.dataRows,"ComplaintReport")
+    
   }
   
 srch(){

@@ -184,10 +184,12 @@
     </div>
     <div class="row"> 
       <div class="col-lg-2 col-md-2 col-sm-4 col-xs-12">
-      Product Detail
+      Enter Product Details
       </div>
       <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
         <input class="form-control"  type="text" name="Product"  [(ngModel)]="model.Product" >
+
+        
       </div>
       <div class="col-lg-2 col-md-2 col-sm-4 col-xs-12">
 Close Date 
@@ -195,6 +197,29 @@ Close Date
         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
           <input class="form-control"  type="date" name="CloseDate"  [(ngModel)]="model.CloseDate" >
         </div>
+    </div>
+    <div class="row"> 
+        <div class="col-lg-2 col-md-2 col-sm-4 col-xs-12">
+          Enter Expiry Days
+         </div>
+         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+          <input class="form-control"  type="number" name="expirydate"   [(ngModel)]="model.expirydate" >
+         </div>
+         <div class="col-md-6">
+         <form  (ngSubmit)="onSubmit()">
+          Select File:
+          <input type="file" name="filename" id="fileToUpload"  (change)="fileEvent($event)">
+          <input type="submit" value="Upload File" name="submit">
+      </form>
+    </div>
+    </div>
+    <div class="row">
+      
+      <ul class="listtt">
+      <li *ngFor="let hero of filelist">
+       <a [href]="path + hero">{{hero}}</a>
+      </li>
+    </ul>
     </div>
     </div>
    

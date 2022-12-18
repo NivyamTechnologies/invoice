@@ -20,7 +20,7 @@ import { DatePipe } from '@angular/common';
     AppComponent,
     AdminComponent,
     AuthComponent,
-    BreadcrumbsComponent,
+    BreadcrumbsComponent
     
     
     

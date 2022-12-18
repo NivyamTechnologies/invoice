@@ -137,6 +137,14 @@ const routes: Routes = [
         loadChildren : './theme/masters/crm-complaint-browser/crm-complaint-browser.module#CrmComplaintBrowserModule'
       },
       {
+        path : 'forms/addenginner',
+        loadChildren : './theme/masters/addengineer/addengineer.module#AddengineerModule'
+      },
+      {
+        path : 'forms/enginnerbrowser',
+        loadChildren : './theme/masters/engineerbrowser/engineerbrowser.module#EngineerbrowserModule'
+      },
+      {
         path : 'forms/schoolbrowser',
         loadChildren : './theme/browsers/school-browser/school-browser.module#SchoolBrowserModule'
       },

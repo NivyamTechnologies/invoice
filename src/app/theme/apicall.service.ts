@@ -16,7 +16,7 @@ export class ApicallService {
   
   //serIP = 'localhost:3000'
  //ProfileId = 'mansi'
- ProfileId = 'total'
+ ProfileId = 'tsetgst'
   constructor(private http: HttpClient,private datepipe:DatePipe) { }
 
 
@@ -131,7 +131,20 @@ export class ApicallService {
     FileSaver.saveAs(data, fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION);
     // alert("Exporting to Excel")
   }
-  
+
+
+    saveimg(Name, d) {
+    //let url  = 'http://192.168.0.171:3002/common/imgresize?Name='+Name
+    let url = 'http://' + this.serIP + '/users/fileupload?Name=' + Name
+    let b = { data: d }
+    return this.http.post(url, d)
+  }
+  getimg(Name) {
+    //let url  = 'http://192.168.0.171:3002/common/imgresize?Name='+Name
+    let url = 'http://' + this.serIP + '/users/getFiles?Name=' + Name
+    return this.http.get(url)
+  }
+
    numberToWords(num) {
     const first = [
       "",

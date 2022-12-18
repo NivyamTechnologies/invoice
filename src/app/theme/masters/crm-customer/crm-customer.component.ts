@@ -39,6 +39,7 @@ export class CrmCustomerComponent implements OnInit {
   "Model":null,
   "Brand":null,
   "SerialNo":null,
+  "OutSerialNo":null,
   "PinCode":null
   }
 
@@ -64,13 +65,7 @@ export class CrmCustomerComponent implements OnInit {
       if(this.type == "NewSchool")
       {
         this.api.saveMasterDefinition("crmcustomer",{customer : [this.model]}).subscribe((dd)=>{
-         debugger
-          let qry = `insert into service (CustomerId,ServiceDate) values ('${dd}','${this.addMonths(3).toISOString().split('T')[0]}');
-          insert into service (CustomerId,ServiceDate) values ('${dd}','${this.addMonths(6).toISOString().split('T')[0]}');insert into service (CustomerId,ServiceDate) values ('${dd}','${this.addMonths(12).toISOString().split('T')[0]}')`
-          this.api.Get("/total/execMultipleQuery",["Query="+qry]).subscribe(data=>{
-            
-           
-          })
+
           alert("customer saved")
          // this.route.navigateByUrl('/schoolbrowser')
         },err=>{

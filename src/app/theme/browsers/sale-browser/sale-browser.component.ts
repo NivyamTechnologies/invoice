@@ -32,7 +32,7 @@ export class SaleBrowserComponent implements OnInit {
   getdata()
   {
    
-    this.api.Post("/total/getBrowser",{Condition : "where DocNo=27 "},["EntityName=Sale"]).subscribe(data=>{
+    this.api.Post("/total/getBrowser",{Condition : "where DocNo=27 "},["EntityName=SaleCrm"]).subscribe(data=>{
       // this.dataRows = data['data']
       console.log("browserdata",data)
       this.dataColumns = data['Columns']
